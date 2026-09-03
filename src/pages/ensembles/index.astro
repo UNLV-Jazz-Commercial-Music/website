@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ensembles } from '../../data/ensembles';
+import { loadUpcomingEvents, formatEventDate } from '../../lib/events';
+
+const upcoming = await loadUpcomingEvents();
+
+/**
+ * Each ensemble's own upcoming dates, matched on the exact ensemble name used in
+ * the events Sheet. This is why the names in ensembles.ts must match the Sheet.
+ */
+const scheduleFor = (name: string) =>
+  upcoming.filter((event) => event.ensembles.includes(name));
+---
+
+<Base
+  title="Ensembles"
+  description="The eight active ensembles of the UNLV Jazz & Commercial Music area — big bands, vocal jazz, Latin jazz, contemporary jazz, and the Joe Williams Scholarship small groups."
+>
+  <h1>Ensembles</h1>
+
+  <p class="lede">
+    Eight ensembles perform across our concert season, on campus and throughout
+    Las Vegas.
+  </p>
+
+  <div class="ensembles">
+    {
+      ensembles.map((ensemble) => {
+        const dates = scheduleFor(ensemble.name);
+        return (
+          <section class="ensemble">
+            <h2>{ensemble.name}</h2>
+            <p class="ensemble-directors">
+              {ensemble.directors.length > 1 ? 'Directors' : 'Director'}:{' '}
+              {ensemble.directors.join(' and ')}
+            </p>
+            <p class="ensemble-description">{ensemble.description}</p>
+
+            {dates.length > 0 && (
+              <p class="ensemble-dates">
+                <strong>Coming up:</strong>{' '}
+                {dates
+                  .map((event) => `${formatEventDate(event.date)} at ${event.venue}`)
+                  .join(' · ')}
+              </p>
+            )}
+          </section>
+        );
+      })
+    }
+  </div>
+
+  <section class="aside-note">
+    <h2>Interested in playing with us?</h2>
+    <p>
+      Audition requirements, degree programs and admissions information are
+      maintained by the UNLV School of Music at{' '}
+      <a href="https://www.unlv.edu/music">unlv.edu/music</a>.
+    </p>
+  </section>
+
+  <style>
+    .ensembles {
+      display: grid;
+      gap: 1.75rem;
+      margin-top: 2rem;
+    }
+
+    .ensemble {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.1rem;
+    }
+
+    .ensemble h2 {
+      margin: 0 0 0.15rem;
+      font-size: 1.25rem;
+    }
+
+    .ensemble-directors {
+      margin: 0 0 0.5rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .ensemble-description {
+      margin: 0;
+      max-width: 46rem;
+    }
+
+    .ensemble-dates {
+      margin: 0.6rem 0 0;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+    }
+
+    .aside-note {
+      margin-top: 3rem;
+      padding: 1.25rem;
+      background: var(--panel);
+      border-radius: 6px;
+    }
+
+    .aside-note h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+
+    .aside-note p {
+      margin-bottom: 0;
+      max-width: 46rem;
+    }
+  </style>
+</Base>

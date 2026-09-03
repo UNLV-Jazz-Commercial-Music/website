@@ -23,9 +23,12 @@ const { title, description } = Astro.props;
 const SITE_NAME = 'UNLV Jazz & Commercial Music';
 const pageTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
 
+// Only pages that actually exist. Add to this as pages ship — never link ahead
+// of the build, since a nav pointing at a 404 is worse than a shorter nav.
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/events', label: 'Events' },
+  { href: '/ensembles', label: 'Ensembles' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
