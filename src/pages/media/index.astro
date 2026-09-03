@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { albums } from '../../data/discography';
+import { albums, BANDCAMP_URL } from '../../data/discography';
 
 const recent = albums.filter((album) => album.year >= 2025);
 const catalogue = albums.filter((album) => album.year < 2025);
@@ -54,6 +54,12 @@ const socials = [
             </p>
           )}
 
+          {album.url && (
+            <p class="album-listen">
+              <a href={album.url}>Listen</a>
+            </p>
+          )}
+
           {album.tracks && (
             <details class="tracks">
               <summary>Track listing</summary>
@@ -76,16 +82,25 @@ const socials = [
   </div>
 
   <p class="streaming-note">
-    Both 2026 releases are available on all major streaming services.
+    The 2026 releases are available on all major streaming services. Most of the
+    catalogue can be heard and bought on our
+    <a href={BANDCAMP_URL}>Bandcamp</a>.
   </p>
 
   <h2>Earlier recordings</h2>
+
+  <p class="lede">
+    There has been a release nearly every year since 2010.
+  </p>
 
   <ul class="catalogue">
     {
       catalogue.map((album) => (
         <li>
-          <span class="catalogue-title">{album.title}</span>
+          <span class="catalogue-title">
+            {album.url ? <a href={album.url}>{album.title}</a> : album.title}
+            {album.artist && <span class="catalogue-artist"> · {album.artist}</span>}
+          </span>
           <span class="catalogue-year">{album.year}</span>
         </li>
       ))
@@ -202,6 +217,19 @@ const socials = [
     .catalogue-year {
       color: var(--ink-soft);
       font-variant-numeric: tabular-nums;
+    }
+
+    .catalogue-artist {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+
+    .album-listen {
+      margin: 0 0 0.4rem;
+    }
+
+    .album-listen a {
+      font-weight: 600;
     }
   </style>
 </Base>
