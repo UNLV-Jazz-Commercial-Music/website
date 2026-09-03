@@ -1,0 +1,207 @@
+---
+import Base from '../../layouts/Base.astro';
+import { albums } from '../../data/discography';
+
+const recent = albums.filter((album) => album.year >= 2025);
+const catalogue = albums.filter((album) => album.year < 2025);
+
+const socials = [
+  { label: 'Instagram', handle: '@unlvjazz', url: 'https://www.instagram.com/unlvjazz' },
+  { label: 'YouTube', handle: '@UNLVJazzCommercialMusic', url: 'https://www.youtube.com/@UNLVJazzCommercialMusic' },
+  { label: 'Facebook', handle: 'facebook.com/unlvjazz', url: 'https://www.facebook.com/unlvjazz' },
+];
+---
+
+<Base
+  title="Media"
+  description="Recordings, video and social channels from the UNLV Jazz & Commercial Music area, including the 2026 releases My Favorite Things and Back Home."
+>
+  <h1>Media</h1>
+
+  <p class="lede">
+    Our ensembles record every year. Two albums came out of the 2025–26 academic
+    year, and the program has taken 53 DownBeat Student Music Awards since 2010.
+  </p>
+
+  <h2>Follow us</h2>
+
+  <ul class="socials">
+    {
+      socials.map((social) => (
+        <li>
+          <a href={social.url}>{social.label}</a>
+          <span class="handle">{social.handle}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>Recent releases</h2>
+
+  <div class="albums">
+    {
+      recent.map((album) => (
+        <article class="album">
+          <h3>
+            {album.title} <span class="album-year">{album.year}</span>
+          </h3>
+          {album.artist && <p class="album-artist">{album.artist}</p>}
+          {album.note && <p class="album-note">{album.note}</p>}
+          {album.label && (
+            <p class="album-label">
+              {album.label}
+              {album.catalogNumber && ` · ${album.catalogNumber}`}
+            </p>
+          )}
+
+          {album.tracks && (
+            <details class="tracks">
+              <summary>Track listing</summary>
+              <ol>
+                {album.tracks.map((track) => (
+                  <li>
+                    <strong>{track.title}</strong>
+                    {track.composer && <span class="track-credit"> — {track.composer}</span>}
+                    {track.arranger && (
+                      <span class="track-credit">, arr. {track.arranger}</span>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </details>
+          )}
+        </article>
+      ))
+    }
+  </div>
+
+  <p class="streaming-note">
+    Both 2026 releases are available on all major streaming services.
+  </p>
+
+  <h2>Earlier recordings</h2>
+
+  <ul class="catalogue">
+    {
+      catalogue.map((album) => (
+        <li>
+          <span class="catalogue-title">{album.title}</span>
+          <span class="catalogue-year">{album.year}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <style>
+    .socials {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2rem;
+    }
+
+    .socials li {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .socials a {
+      font-weight: 600;
+    }
+
+    .handle {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+
+    .albums {
+      display: grid;
+      gap: 1.75rem;
+      margin-top: 1rem;
+    }
+
+    .album {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.1rem;
+    }
+
+    .album h3 {
+      margin: 0 0 0.15rem;
+      font-size: 1.2rem;
+    }
+
+    .album-year {
+      font-weight: 400;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+
+    .album-artist {
+      margin: 0 0 0.5rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .album-note,
+    .album-label {
+      margin: 0 0 0.4rem;
+      max-width: 46rem;
+    }
+
+    .album-label {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    .tracks summary {
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .tracks ol {
+      margin: 0.6rem 0 0;
+      padding-left: 1.4rem;
+      max-width: 46rem;
+    }
+
+    .tracks li {
+      margin-bottom: 0.25rem;
+    }
+
+    .track-credit {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    .streaming-note {
+      margin-top: 1.25rem;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+    }
+
+    .catalogue {
+      list-style: none;
+      padding: 0;
+      max-width: 32rem;
+    }
+
+    .catalogue li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .catalogue-year {
+      color: var(--ink-soft);
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</Base>

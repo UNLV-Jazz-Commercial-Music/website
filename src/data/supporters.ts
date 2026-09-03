@@ -1,12 +1,20 @@
 /**
- * Organizations that support the program, recognized on the Support page.
+ * Organizations, foundations and funds that support the program.
  *
- * INCOMPLETE — Jaxon is supplying the full list. The two below are the only ones
- * confirmed so far. Add the rest as they come in; the page handles any number.
+ * SOURCE: the acknowledgements page of the 2026 album "My Favorite Things"
+ * (Canva design "2026 UNLV Jazz CD design"), which is the program's own most
+ * recent and most carefully checked list.
  *
- * Get these names exactly right. A recognition page that misspells a donor's
- * name is worse than no recognition page. Where an organization has a website,
- * add it — linking out is a courtesy donors notice.
+ * ⚠️ ORGANIZATIONS AND FUNDS ONLY — DELIBERATELY.
+ * The album acknowledgements also name roughly a dozen private individuals.
+ * They are NOT listed here, and should not be added without asking them first.
+ * A credit inside a CD booklet is not consent to appear on a public web page,
+ * and donors who gave quietly have a reasonable expectation of staying quiet.
+ * The full list including individuals is recorded in the vault note
+ * "Website Rebuild" for Jaxon and Dave to decide on.
+ *
+ * Get the names exactly right. A recognition page that misspells a donor is
+ * worse than having no recognition page at all.
  */
 
 export interface Supporter {
@@ -17,13 +25,28 @@ export interface Supporter {
 }
 
 export const supporters: Supporter[] = [
-  {
-    // Spelling per Jaxon 2026-09-03. Worth double-checking against the
-    // foundation's own materials — it may render as "Every Day" (two words),
-    // after the Joe Williams recording "Every Day I Have the Blues".
-    name: 'Joe Williams Everyday Foundation',
-  },
-  {
-    name: 'UNLV Friends of Jazz',
-  },
+  { name: 'The UNLV Foundation' },
+  { name: 'The Patterson Foundation' },
+  { name: 'The Joe Williams Every Day Foundation' },
+  { name: 'Friends of UNLV Jazz' },
+  { name: 'Las Vegas Jazz Society' },
+  { name: 'The Forgotten Song Foundation' },
+  { name: 'Vegas Records', url: 'https://www.vegasrecords.org' },
+  { name: 'KUNV' },
+  { name: 'The Library District' },
+  { name: 'Investment Counsel Company' },
+];
+
+/**
+ * Named scholarship funds. Separated from the list above because these are
+ * endowments students apply to, not organizations — worth presenting as its own
+ * group so a prospective donor can see what naming a fund looks like.
+ */
+export const scholarshipFunds: Supporter[] = [
+  { name: 'Jake Garehime Jazz Scholarship Fund' },
+  { name: 'The Isabelle Emerson Jazz Scholarship Fund' },
+  { name: 'The Jay Morrison Jazz Scholarship Fund' },
+  { name: 'The William and Carol McLeod Scholarship Fund' },
+  { name: 'Paul Coladarci Jazz Scholarship Fund' },
+  { name: 'Curt and Eliane Miller Scholarship Endowment' },
 ];
