@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import EventList from '../../components/EventList.astro';
+import { loadUpcomingEvents, loadPastEvents } from '../../lib/events';
+
+const upcoming = await loadUpcomingEvents();
+const past = await loadPastEvents(10);
+---
+
+<Base
+  title="Events"
+  description="Upcoming concerts and performances by the UNLV Jazz & Commercial Music ensembles."
+>
+  <h1>Events</h1>
+
+  <p class="lede">
+    Every performance by our ensembles. Past events archive themselves — nothing
+    here has to be deleted by hand.
+  </p>
+
+  <h2>Upcoming</h2>
+
+  <EventList
+    events={upcoming}
+    emptyMessage="Nothing on the calendar right now — check back soon."
+  />
+
+  {
+    past.length > 0 && (
+      <>
+        <h2>Recently performed</h2>
+        <EventList events={past} />
+      </>
+    )
+  }
+</Base>

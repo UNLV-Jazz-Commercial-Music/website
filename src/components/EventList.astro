@@ -1,0 +1,56 @@
+---
+import { formatEventDate, mapUrl, type JcmEvent } from '../lib/events';
+
+interface Props {
+  events: JcmEvent[];
+  /** Shown when there are no events, instead of an empty box. */
+  emptyMessage?: string;
+}
+
+const { events, emptyMessage = 'No events scheduled yet.' } = Astro.props;
+---
+
+{
+  events.length === 0 ? (
+    <p class="empty">{emptyMessage}</p>
+  ) : (
+    <ul class="event-list">
+      {events.map((event) => {
+        const map = mapUrl(event);
+        return (
+          <li class:list={['event', { 'is-cancelled': event.status === 'Cancelled' }]}>
+            <p class="event-when">
+              {formatEventDate(event.date)}
+              {event.startTime && ` · ${event.startTime}`}
+            </p>
+
+            <h3 class="event-headline">
+              {event.headline}
+              {event.status === 'Cancelled' && (
+                <span class="badge badge-cancelled">Cancelled</span>
+              )}
+              {event.status === 'Tentative' && (
+                <span class="badge badge-tentative">Date TBC</span>
+              )}
+            </h3>
+
+            {event.venue && (
+              <p class="event-meta">
+                {map ? <a href={map}>{event.venue}</a> : event.venue}
+                {event.admission && ` · ${event.admission}`}
+              </p>
+            )}
+
+            {event.description && <p class="event-note">{event.description}</p>}
+
+            {event.ticketUrl && event.status !== 'Cancelled' && (
+              <p class="event-note">
+                <a href={event.ticketUrl}>Tickets</a>
+              </p>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  )
+}

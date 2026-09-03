@@ -1,17 +1,28 @@
 ---
+import Base from '../layouts/Base.astro';
+import EventList from '../components/EventList.astro';
+import { loadUpcomingEvents } from '../lib/events';
 
+const upcoming = await loadUpcomingEvents(3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title="Home"
+  description="Jazz and commercial music at the University of Nevada, Las Vegas — three big bands, ten combos, vocal, guitar, Latin and contemporary jazz ensembles."
+>
+  <h1>UNLV Jazz &amp; Commercial Music</h1>
+
+  <p class="lede">
+    Three big bands, ten combos, and vocal, guitar, Latin and contemporary jazz
+    ensembles, performing across Las Vegas and beyond.
+  </p>
+
+  <h2>Upcoming performances</h2>
+
+  <EventList
+    events={upcoming}
+    emptyMessage="Nothing on the calendar right now — check back soon."
+  />
+
+  {upcoming.length > 0 && <p><a href="/events">See all events</a></p>}
+</Base>
