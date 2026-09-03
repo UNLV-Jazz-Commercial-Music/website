@@ -1,0 +1,114 @@
+---
+/**
+ * Support page.
+ *
+ * NOT IN THE NAV YET, on purpose. Two things are missing:
+ *   1. The giving link. All donations flow through the UNLV Foundation, and
+ *      Dave needs to supply the exact destination — there is very likely a
+ *      J&CM-designated fund, and guessing a generic UNLV giving URL could
+ *      route someone's gift to the wrong place. Nothing here handles money
+ *      directly, and it never should on a site UNLV hasn't sanctioned.
+ *   2. The full supporter list (see src/data/supporters.ts).
+ *
+ * Add the nav link in src/layouts/Base.astro once the giving destination is
+ * confirmed.
+ */
+import Base from '../../layouts/Base.astro';
+import { supporters } from '../../data/supporters';
+
+/** Set to the UNLV Foundation giving destination once Dave confirms it. */
+const GIVING_URL: string | null = null;
+---
+
+<Base
+  title="Support"
+  description="Support jazz and commercial music at UNLV. Gifts fund scholarships, guest artists, and the ensembles' recording and touring."
+>
+  <h1>Support the program</h1>
+
+  <p class="lede">
+    Our ensembles perform across Las Vegas, record, and travel, and our students
+    study with visiting artists — all of it made possible by people who decided
+    this program was worth funding.
+  </p>
+
+  <h2>What your support does</h2>
+
+  <ul class="impact">
+    <li><strong>Scholarships</strong> that let students study here who otherwise could not.</li>
+    <li><strong>Guest artists and clinicians</strong> brought in to work directly with our students.</li>
+    <li><strong>Recording projects</strong>, so student work exists past the night it was played.</li>
+    <li><strong>Travel</strong> to festivals and competitions that put our ensembles in front of national audiences.</li>
+  </ul>
+
+  <h2>How to give</h2>
+
+  {
+    GIVING_URL ? (
+      <p>
+        Gifts to the program are made through the UNLV Foundation.
+        <a href={GIVING_URL}>Give to Jazz &amp; Commercial Music</a>.
+      </p>
+    ) : (
+      <p>
+        All gifts to the program are made through the{' '}
+        <strong>UNLV Foundation</strong>. To give, or to discuss a gift, email{' '}
+        <a href="mailto:jazz@unlv.edu">jazz@unlv.edu</a> and we'll put you in
+        touch with the right person.
+      </p>
+    )
+  }
+
+  {
+    supporters.length > 0 && (
+      <>
+        <h2>With thanks to</h2>
+        <p>
+          The program's work is supported by these organizations, and we're
+          grateful to every one of them.
+        </p>
+        <ul class="supporters">
+          {supporters.map((supporter) => (
+            <li>
+              {supporter.url ? (
+                <a href={supporter.url}>{supporter.name}</a>
+              ) : (
+                supporter.name
+              )}
+              {supporter.note && <span class="supporter-note"> — {supporter.note}</span>}
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  <style>
+    .impact,
+    .supporters {
+      max-width: 46rem;
+      padding-left: 1.2rem;
+    }
+
+    .impact li,
+    .supporters li {
+      margin-bottom: 0.4rem;
+    }
+
+    .supporters {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .supporters li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-weight: 600;
+    }
+
+    .supporter-note {
+      font-weight: 400;
+      color: var(--ink-soft);
+    }
+  </style>
+</Base>
