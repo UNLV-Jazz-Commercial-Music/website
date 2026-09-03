@@ -1,0 +1,21 @@
+# Netlify build configuration.
+#
+# Pinning these here rather than clicking them into the Netlify dashboard is
+# deliberate: settings in a dashboard are invisible, undocumented, and lost when
+# someone rebuilds the site later. Settings in this file are versioned and
+# reviewable, and a fresh Netlify account pointed at this repo configures itself.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Astro 7 requires Node 22 or newer. Netlify's default has historically lagged,
+  # which produces a confusing "works locally, fails on deploy" failure.
+  NODE_VERSION = "24"
+
+# Serve a real 404 rather than Netlify's generic one.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
