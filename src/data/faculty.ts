@@ -59,6 +59,10 @@ export const professors: FacultyMember[] = [
  */
 
 export const adjunct: FacultyMember[] = [
+  // Confirmed by Jaxon 2026-09-03. Appears in the program's own concert-program
+  // faculty listing but not under J&CM on the UNLV directory, so the bio link
+  // may not resolve to him.
+  { name: 'James Anderson', role: 'Jazz Violin' },
   { name: 'Steve Flora', credentials: 'B.M.', role: 'Jazz Bass' },
   { name: 'Gary Fowler', role: 'Jazz Voice, Vocal Jazz Ensembles' },
   { name: 'Uli Geissendoerfer', role: 'Jazz Piano' },
