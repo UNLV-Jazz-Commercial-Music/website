@@ -1,0 +1,135 @@
+---
+/**
+ * Contact.
+ *
+ * NO CONTACT FORM, deliberately. The audit flagged the old site's lack of one,
+ * and a form is easy to add — but every form needs a third-party service to
+ * receive submissions, which means another account, owned by someone, that
+ * outlives whoever set it up. That is the exact failure this whole project is
+ * built to avoid, and it would be the fourth such account after GitHub,
+ * Netlify and the newsletter. A mailto to a delegated shared mailbox has no
+ * owner to lose and nothing to maintain. Revisit only if email proves
+ * insufficient.
+ *
+ * MAILING ADDRESS is UNLV's published campus address. The School of Music's
+ * specific mail stop / box number would make delivery more reliable and should
+ * be added when known.
+ *
+ * VENUE ADDRESSES: map links are built from venue name + city, which resolves
+ * correctly but imprecisely. Filling the `address` column in the events Sheet
+ * would produce exact pins on the Events page too.
+ */
+import Base from '../../layouts/Base.astro';
+
+const venues = [
+  {
+    name: 'Artemus W. Ham Hall',
+    detail: 'On the UNLV campus. Ticketed events; UNLV students free.',
+  },
+  {
+    name: 'Dr. Arturo Rando-Grillot Hall',
+    detail: 'On the UNLV campus. Free to attend.',
+  },
+  {
+    name: 'Paul Harris Theater',
+    detail: 'On the UNLV campus. Free to attend.',
+  },
+  {
+    name: 'Clark County Library Flamingo Road',
+    detail: 'Off campus. Free and open to the public.',
+  },
+];
+
+const mapUrl = (name: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name}, Las Vegas, NV`)}`;
+---
+
+<Base
+  title="Contact"
+  description="Contact the UNLV Jazz & Commercial Music area, and find the venues where our ensembles perform."
+>
+  <h1>Contact</h1>
+
+  <p class="lede">
+    For anything at all — booking an ensemble, press enquiries, questions about a
+    concert, or supporting the program — email us and it reaches the right
+    person.
+  </p>
+
+  <h2>Email</h2>
+
+  <p class="contact-email">
+    <a href="mailto:jazz@unlv.edu">jazz@unlv.edu</a>
+  </p>
+
+  <h2>Booking an ensemble</h2>
+
+  <p>
+    Our ensembles perform at events across Las Vegas. Email
+    <a href="mailto:jazz@unlv.edu">jazz@unlv.edu</a> with the date, venue and
+    what you have in mind, and we'll tell you what's possible.
+  </p>
+
+  <h2>Mail</h2>
+
+  <address>
+    UNLV Jazz &amp; Commercial Music<br />
+    School of Music<br />
+    University of Nevada, Las Vegas<br />
+    4505 S. Maryland Pkwy.<br />
+    Las Vegas, NV 89154
+  </address>
+
+  <h2>Where we perform</h2>
+
+  <ul class="venues">
+    {
+      venues.map((venue) => (
+        <li>
+          <a href={mapUrl(venue.name)}>{venue.name}</a>
+          <span class="venue-detail">{venue.detail}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p>
+    Each concert on the <a href="/events">events page</a> links to directions for
+    its venue.
+  </p>
+
+  <style>
+    .contact-email {
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    address {
+      font-style: normal;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    .venues {
+      list-style: none;
+      padding: 0;
+      max-width: 46rem;
+    }
+
+    .venues li {
+      display: grid;
+      gap: 0.1rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .venues a {
+      font-weight: 600;
+    }
+
+    .venue-detail {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+  </style>
+</Base>
