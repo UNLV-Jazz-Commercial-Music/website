@@ -1,52 +1,53 @@
 /**
- * Organizations, foundations and funds that support the program.
+ * Special Thanks — the program's supporters.
  *
- * SOURCE: the acknowledgements page of the 2026 album "My Favorite Things"
- * (Canva design "2026 UNLV Jazz CD design"), which is the program's own most
- * recent and most carefully checked list.
+ * SOURCE: the "Special Thanks" page of the Fall 2026 CD Release Concert Program
+ * (Canva, "Fall 2026 CD Release Concert Program"), read 2026-09-03. Jaxon
+ * pointed here as the authoritative list.
  *
- * ⚠️ ORGANIZATIONS AND FUNDS ONLY — DELIBERATELY.
- * The album acknowledgements also name roughly a dozen private individuals.
- * They are NOT listed here, and should not be added without asking them first.
- * A credit inside a CD booklet is not consent to appear on a public web page,
- * and donors who gave quietly have a reasonable expectation of staying quiet.
- * The full list including individuals is recorded in the vault note
- * "Website Rebuild" for Jaxon and Dave to decide on.
+ * ON NAMING INDIVIDUALS: an earlier version of this file excluded private
+ * individuals out of caution. That caution was unnecessary — this list comes
+ * from a concert program the program prints and hands to an audience, so these
+ * are names the program already publishes as public recognition. Reproducing
+ * that same list here is consistent with what the program already does.
  *
- * Get the names exactly right. A recognition page that misspells a donor is
- * worse than having no recognition page at all.
+ * Keep the order and wording as the concert program has it. These are people's
+ * names and the names of funds honouring people; getting one wrong is worse
+ * than omitting the section.
+ *
+ * ⚠️ One unresolved spelling: the concert program says "Curt & Elaine Miller"
+ * while the "My Favorite Things" album acknowledgements say "Curt and Eliane
+ * Miller". Two of the program's own documents disagree. The concert program is
+ * the newer of the two and is used here, but this should be checked.
  */
 
 export interface Supporter {
   name: string;
   url?: string;
-  /** Optional one-line description of what they support. */
-  note?: string;
 }
 
 export const supporters: Supporter[] = [
-  { name: 'The UNLV Foundation' },
-  { name: 'The Patterson Foundation' },
   { name: 'The Joe Williams Every Day Foundation' },
-  { name: 'Friends of UNLV Jazz' },
-  { name: 'Las Vegas Jazz Society' },
-  { name: 'The Forgotten Song Foundation' },
-  { name: 'Vegas Records', url: 'https://www.vegasrecords.org' },
-  { name: 'KUNV' },
-  { name: 'The Library District' },
-  { name: 'Investment Counsel Company' },
-];
-
-/**
- * Named scholarship funds. Separated from the list above because these are
- * endowments students apply to, not organizations — worth presenting as its own
- * group so a prospective donor can see what naming a fund looks like.
- */
-export const scholarshipFunds: Supporter[] = [
-  { name: 'Jake Garehime Jazz Scholarship Fund' },
+  { name: 'Clint Holmes, Naomi Mauro, Melanie Moore, Nick Mastrangelo' },
+  { name: 'Randy Garcia and the Investment Counsel Company' },
+  { name: 'Doug & Lynn Small' },
+  { name: 'Jake Garehime Jazz Scholarships' },
   { name: 'The Isabelle Emerson Jazz Scholarship Fund' },
-  { name: 'The Jay Morrison Jazz Scholarship Fund' },
-  { name: 'The William and Carol McLeod Scholarship Fund' },
-  { name: 'Paul Coladarci Jazz Scholarship Fund' },
-  { name: 'Curt and Eliane Miller Scholarship Endowment' },
+  { name: 'The Patterson Foundation' },
+  { name: 'The Jay Morrison Jazz Scholarships' },
+  { name: 'Las Vegas Jazz Society' },
+  { name: 'The UNLV Recording Studio Staff' },
+  { name: 'The William & Carol McLeod Scholarship Fund' },
+  { name: 'Dave Viger' },
+  { name: 'Sue and Paul Coladarci Jazz Scholarship Fund' },
+  { name: 'KUNV' },
+  { name: 'Thomas Bridge' },
+  { name: 'Suzanne Scott and the Clark County Library District' },
+  { name: 'Jeff Williams, Coordinator of Secondary Fine Arts, Clark County School District' },
+  { name: 'Ann Parenti' },
+  { name: 'The Forgotten Song Foundation' },
+  { name: 'Laura Taylor & David Mulkey' },
+  { name: 'Curt & Elaine Miller Endowed Scholarship for Jazz and Commercial Music' },
+  { name: 'Robert & Shirley Kramer' },
+  { name: 'Friends of UNLV Jazz' },
 ];

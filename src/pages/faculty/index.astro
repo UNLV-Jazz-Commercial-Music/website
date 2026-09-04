@@ -2,7 +2,6 @@
 import Base from '../../layouts/Base.astro';
 import {
   professors,
-  emeritus,
   adjunct,
   DIRECTORY_URL,
   type FacultyMember,
@@ -10,7 +9,6 @@ import {
 
 const groups: { heading: string; people: FacultyMember[] }[] = [
   { heading: 'Faculty', people: professors },
-  { heading: 'Professor Emeritus', people: emeritus },
   { heading: 'Adjunct Faculty', people: adjunct },
 ];
 ---

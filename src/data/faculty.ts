@@ -41,13 +41,22 @@ export const professors: FacultyMember[] = [
   {
     name: 'Adam Schroeder',
     credentials: 'M.M.',
-    role: 'Associate Professor · Area Co-coordinator',
+    role: 'Associate Professor · Area Co-coordinator · Saxophone, Improvisation, Jazz Combos',
   },
 ];
 
-export const emeritus: FacultyMember[] = [
-  { name: 'Tom Warrington', credentials: 'M.M.', role: 'Professor Emeritus' },
-];
+/**
+ * Tom Warrington (Professor Emeritus) was removed 2026-09-03: he appears on the
+ * UNLV directory but is no longer active with the program, per Jaxon. Emeritus
+ * faculty are not listed for that reason — don't re-add from the directory
+ * without checking.
+ *
+ * Gabriel Carpenter is also deliberately absent. He is a DMA student in the
+ * program hired as a Part-Time Instructor to direct Jazz Ensemble II, so he is
+ * credited as a director on the Ensembles page, which is accurate. He is not on
+ * the UNLV faculty directory that this page's bio link points to, and he is not
+ * in the program's own concert-program faculty listing either.
+ */
 
 export const adjunct: FacultyMember[] = [
   { name: 'Steve Flora', credentials: 'B.M.', role: 'Jazz Bass' },
