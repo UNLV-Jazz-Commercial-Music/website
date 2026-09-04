@@ -14,8 +14,9 @@
   # which produces a confusing "works locally, fails on deploy" failure.
   NODE_VERSION = "24"
 
-# Serve a real 404 rather than Netlify's generic one.
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
+# NO CATCH-ALL 404 REDIRECT HERE, deliberately.
+#
+# A `from = "/*" -> /404.html` rule was removed 2026-09-03: it made /admin/
+# return 404 by shadowing directory-index resolution, and it was redundant in
+# the first place. Netlify already serves dist/404.html automatically for any
+# unmatched path on a static site. Don't add it back.
