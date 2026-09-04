@@ -63,14 +63,14 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
       <div class="wrap header-inner">
         <a class="wordmark" href="/">
           {
-            /* Falls back to the text wordmark when no logo is uploaded, so an
-               empty field never leaves a broken image or a blank header. */
-            logo ? (
-              <img src={logo.src} alt={logo.alt} class="logo" width="220" height="48" />
-            ) : (
-              SITE_NAME
-            )
+            /* The program's logo is a SQUARE mark (2000x2000), not a wordmark
+               with the name in it — at any height that fits a header, text
+               inside it would be illegible. So it's paired with the name as
+               real text: the mark for recognition, the text for reading.
+               No logo uploaded means just the text, and nothing breaks. */
+            logo && <img src={logo.src} alt="" class="logo" width="2000" height="2000" />
           }
+          <span class="wordmark-text">{SITE_NAME}</span>
         </a>
         <nav aria-label="Main">
           <ul>
@@ -200,18 +200,28 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
       }
 
       .logo {
+        /* Square mark. Height drives the size; alt is empty because the
+           adjacent text already names the program — a screen reader announcing
+           both would just say it twice. */
         display: block;
-        height: 2.6rem;
-        width: auto;
-        max-width: min(60vw, 18rem);
+        height: 2.5rem;
+        width: 2.5rem;
+        flex: none;
       }
 
       .wordmark {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
         font-weight: 700;
         font-size: 1.05rem;
         letter-spacing: -0.01em;
         color: var(--ink);
         text-decoration: none;
+      }
+
+      .wordmark-text {
+        line-height: 1.15;
       }
 
       .site-header nav ul {

@@ -16,7 +16,14 @@ const upcoming = await loadUpcomingEvents(3);
        heading, with no gap and no broken image. */
     hero && (
       <figure class="hero">
-        <img src={hero.src} alt={hero.alt} loading="eager" decoding="async" />
+        <img
+          src={hero.src}
+          alt={hero.alt}
+          width="2048"
+          height="1365"
+          loading="eager"
+          decoding="async"
+        />
         {hero.credit && <figcaption>Photo: {hero.credit}</figcaption>}
       </figure>
     )
@@ -44,9 +51,17 @@ const upcoming = await loadUpcomingEvents(3);
     }
 
     .hero img {
+      /* Capped and cropped rather than left at natural height. A 2048x1365
+         photo at full container width renders ~700px tall, which pushes the
+         headline and the events list clean off the screen — the two things a
+         visitor actually came for. object-fit: cover crops instead of
+         squashing, so any aspect ratio an editor uploads still looks right. */
       display: block;
       width: 100%;
       height: auto;
+      max-height: 24rem;
+      object-fit: cover;
+      object-position: center;
       border-radius: 6px;
     }
 
