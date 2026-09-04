@@ -27,6 +27,19 @@ export interface Ensemble {
   description: string;
   /** Optional. Blank `src` means no photo — the page renders without one. */
   photo?: { src: string; alt: string };
+  /**
+   * Other names in the events Sheet whose concerts belong on this ensemble's
+   * page. Lets the Sheet stay accurate to printed programs while the site
+   * shows a single entry — and lets a renamed or merged group keep its history
+   * instead of silently losing events.
+   */
+  aliases?: string[];
 }
+
+/** Every name that should route events to this ensemble. */
+export const namesFor = (ensemble: Ensemble): string[] => [
+  ensemble.name,
+  ...(ensemble.aliases ?? []),
+];
 
 export const ensembles: Ensemble[] = data.ensembles;

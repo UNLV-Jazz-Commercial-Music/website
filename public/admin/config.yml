@@ -143,10 +143,13 @@ collections:
         label: Ensembles
         file: src/content/ensembles.json
         description: >-
-          The eight active ensembles. IMPORTANT: each name must match the
-          ensemble names used in the events Google Sheet exactly, because that
-          text is how an ensemble finds its own upcoming concerts. Rename one
-          here and you must rename it in the Sheet's dropdown too.
+          The active ensembles. IMPORTANT: an ensemble finds its own concerts by
+          matching its name against the events Google Sheet, so if you rename
+          one here, its concerts stop appearing on its page — silently, with no
+          error. Either rename it in the Sheet's dropdown to match, or add the
+          old name under "Other names used in the events Sheet" below, which
+          keeps the old concerts attached. Run `npm run check` after any rename
+          to confirm nothing was orphaned.
         fields:
           - name: ensembles
             label: Ensembles
@@ -165,6 +168,17 @@ collections:
                 hint: >-
                   Written for concert-goers and donors — what the group is and
                   what it plays. Audition questions are handled by unlv.edu/music.
+              - name: aliases
+                label: Other names used in the events Sheet
+                label_singular: Other name
+                widget: list
+                required: false
+                field: { name: alias, label: Name, widget: string }
+                hint: >-
+                  Usually leave empty. Use it when the Sheet credits concerts to
+                  a different name that should still show on this ensemble's
+                  page — for example a group that was renamed, or two groups
+                  that merged. Concerts under any name listed here appear here.
               - name: photo
                 label: Photo
                 widget: object

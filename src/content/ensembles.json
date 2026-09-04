@@ -10,7 +10,8 @@
       "photo": {
         "src": "/uploads/jazz1groupphoto.webp",
         "alt": "Jazz Ensemble I group photo Spring 2026 Jazz Festival"
-      }
+      },
+      "aliases": []
     },
     {
       "name": "Jazz Ensemble II",
@@ -21,7 +22,8 @@
       "photo": {
         "src": "/uploads/jazz-ensemble-ii-fall-2025-jazz-fest.webp",
         "alt": "Jazz Ensemble II on stage at Artemus W. Ham Hall Fall 2025 Jazz Festival"
-      }
+      },
+      "aliases": []
     },
     {
       "name": "Contemporary Jazz Ensemble",
@@ -32,7 +34,8 @@
       "photo": {
         "src": "/uploads/contemporary-ensemble-ccld-2025.webp",
         "alt": "Contemporary Jazz Ensemble on stage at the Clark County Library Flamingo location Fall 2025"
-      }
+      },
+      "aliases": []
     },
     {
       "name": "Latin Jazz Ensemble",
@@ -43,7 +46,8 @@
       "photo": {
         "src": "/uploads/latin-jazz-ensemble-ccld-2026.webp",
         "alt": "Latin Jazz Ensemble on stage at the Clark County Library Flamingo location Spring 2026"
-      }
+      },
+      "aliases": []
     },
     {
       "name": "Studio Scarlet Jazz Vocal Ensemble",
@@ -54,7 +58,8 @@
       "photo": {
         "src": "/uploads/studio-scarlet-fall-2025-jazz-fest.webp",
         "alt": "Studio Scarlet on stage at Artemus W. Ham Hall Fall 2025 Jazz Festival"
-      }
+      },
+      "aliases": []
     },
     {
       "name": "Maryland Parkway Jazz Vocal Ensemble",
@@ -65,7 +70,8 @@
       "photo": {
         "src": "/uploads/maryland-parkway-fall-2025-jazz-fest.webp",
         "alt": "Maryland Parkway on stage at Artemus W. Ham Hall Fall 2025 Jazz Festival"
-      }
+      },
+      "aliases": []
     },
     {
       "name": "Joe Williams Scholarship Combo",
@@ -76,7 +82,10 @@
       "photo": {
         "src": "/uploads/joe-williams-quintet-ccld-fall-2025.webp",
         "alt": "Joe Williams Scholarship Combo on stage at the Clark County Library Flamingo location Fall 2025"
-      }
+      },
+      "aliases": [
+        "Joe Williams Scholarship Quintet"
+      ]
     },
     {
       "name": "Jazz Combos",
@@ -92,7 +101,8 @@
       "photo": {
         "src": "/uploads/jazz-combo-fall-jazz-fest-2025.webp",
         "alt": "One section of jazz combo in the Performing Arts Center lobby Fall 2025 jazz festival"
-      }
+      },
+      "aliases": []
     }
   ]
 }

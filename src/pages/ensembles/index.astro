@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { ensembles } from '../../data/ensembles';
+import { ensembles, namesFor } from '../../data/ensembles';
 import { loadUpcomingEvents, formatEventDate } from '../../lib/events';
 
 const upcoming = await loadUpcomingEvents();
@@ -9,8 +9,31 @@ const upcoming = await loadUpcomingEvents();
  * Each ensemble's own upcoming dates, matched on the exact ensemble name used in
  * the events Sheet. This is why the names in ensembles.ts must match the Sheet.
  */
-const scheduleFor = (name: string) =>
-  upcoming.filter((event) => event.ensembles.includes(name));
+const scheduleFor = (ensemble: (typeof ensembles)[number]) => {
+  const names = namesFor(ensemble);
+  return upcoming.filter((event) => event.ensembles.some((n) => names.includes(n)));
+};
+
+/**
+ * Warn during the build if the Sheet references an ensemble this page doesn't
+ * list. Those events silently vanish from ensemble pages otherwise. `npm run
+ * check` is the hard version; this puts it in the Netlify deploy log too, so a
+ * rename made in the CMS surfaces without anyone remembering to run anything.
+ *
+ * A warning, not a failure: a faculty member renaming an ensemble should never
+ * be able to break the deploy by typing.
+ */
+const listed = new Set(ensembles.flatMap(namesFor));
+const orphaned = [...new Set(upcoming.flatMap((e) => e.ensembles))].filter(
+  (name) => !listed.has(name),
+);
+if (orphaned.length > 0) {
+  console.warn(
+    `\n  [content] ${orphaned.length} ensemble name(s) in the events Sheet are not on the Ensembles page:\n` +
+      orphaned.map((n) => `    - "${n}"`).join('\n') +
+      `\n  Their concerts will not appear on any ensemble page. Run \`npm run check\` for detail.\n`,
+  );
+}
 ---
 
 <Base
@@ -27,7 +50,7 @@ const scheduleFor = (name: string) =>
   <div class="ensembles">
     {
       ensembles.map((ensemble) => {
-        const dates = scheduleFor(ensemble.name);
+        const dates = scheduleFor(ensemble);
         return (
           <section class="ensemble">
             {ensemble.photo?.src && (
