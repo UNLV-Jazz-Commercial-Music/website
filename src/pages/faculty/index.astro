@@ -1,0 +1,112 @@
+---
+import Base from '../../layouts/Base.astro';
+import {
+  professors,
+  emeritus,
+  adjunct,
+  DIRECTORY_URL,
+  type FacultyMember,
+} from '../../data/faculty';
+
+const groups: { heading: string; people: FacultyMember[] }[] = [
+  { heading: 'Faculty', people: professors },
+  { heading: 'Professor Emeritus', people: emeritus },
+  { heading: 'Adjunct Faculty', people: adjunct },
+];
+---
+
+<Base
+  title="Faculty"
+  description="The faculty of the UNLV Jazz & Commercial Music area — performers and composers teaching every instrument, voice, and jazz composition."
+>
+  <h1>Faculty</h1>
+
+  <p class="lede">
+    Our students study with working musicians — players and composers active on
+    the Las Vegas scene and beyond.
+  </p>
+
+  {
+    groups.map((group) => (
+      <section>
+        <h2>{group.heading}</h2>
+        <ul class="faculty">
+          {group.people.map((person) => (
+            <li>
+              <span class="faculty-name">
+                {person.name}
+                {person.credentials && (
+                  <span class="faculty-credentials">, {person.credentials}</span>
+                )}
+              </span>
+              <span class="faculty-role">{person.role}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+
+  <section class="aside-note">
+    <h2>Full biographies</h2>
+    <p>
+      Complete biographies are maintained by the UNLV School of Music. See the{' '}
+      <a href={DIRECTORY_URL}>School of Music faculty and staff directory</a>,
+      which covers the whole school, not only our area.
+    </p>
+    <p>
+      For general enquiries, email <a href="mailto:jazz@unlv.edu">jazz@unlv.edu</a>.
+    </p>
+  </section>
+
+  <style>
+    .faculty {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+      max-width: 46rem;
+    }
+
+    .faculty li {
+      display: grid;
+      gap: 0.1rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .faculty-name {
+      font-weight: 600;
+    }
+
+    .faculty-credentials {
+      font-weight: 400;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+
+    .faculty-role {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    .aside-note {
+      margin-top: 2.5rem;
+      padding: 1.25rem;
+      background: var(--panel);
+      border-radius: 6px;
+    }
+
+    .aside-note h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+
+    .aside-note p {
+      max-width: 46rem;
+    }
+
+    .aside-note p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</Base>
