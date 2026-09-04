@@ -17,7 +17,7 @@ const scheduleFor = (ensemble: (typeof ensembles)[number]) => {
 /**
  * Warn during the build if the Sheet references an ensemble this page doesn't
  * list. Those events silently vanish from ensemble pages otherwise. `npm run
- * check` is the hard version; this puts it in the Netlify deploy log too, so a
+ * check` is the hard version; this puts it in the Cloudflare build log too, so a
  * rename made in the CMS surfaces without anyone remembering to run anything.
  *
  * A warning, not a failure: a faculty member renaming an ensemble should never
