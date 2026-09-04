@@ -14,6 +14,7 @@
  */
 
 import { SEARCH_ENGINES_ALLOWED } from '../site';
+import { logo } from '../data/settings';
 
 interface Props {
   title?: string;
@@ -60,7 +61,17 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
     <header class="site-header">
       <div class="wrap header-inner">
-        <a class="wordmark" href="/">{SITE_NAME}</a>
+        <a class="wordmark" href="/">
+          {
+            /* Falls back to the text wordmark when no logo is uploaded, so an
+               empty field never leaves a broken image or a blank header. */
+            logo ? (
+              <img src={logo.src} alt={logo.alt} class="logo" width="220" height="48" />
+            ) : (
+              SITE_NAME
+            )
+          }
+        </a>
         <nav aria-label="Main">
           <ul>
             {
@@ -186,6 +197,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
         align-items: center;
         justify-content: space-between;
         padding-block: 1rem;
+      }
+
+      .logo {
+        display: block;
+        height: 2.6rem;
+        width: auto;
+        max-width: min(60vw, 18rem);
       }
 
       .wordmark {

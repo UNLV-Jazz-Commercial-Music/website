@@ -54,6 +54,29 @@ backend:
 media_folder: public/uploads
 public_folder: /uploads
 
+# Uploads are processed before they're committed, which matters a lot here:
+# press photos and album scans routinely arrive at 10-20 MB, and images in
+# public/ are served as-is with no build-time optimization. Without this, one
+# well-meaning upload makes the site slow for everyone on a phone.
+#
+#   - raster images (JPEG, PNG, HEIC...) become WebP, capped at 2048px
+#   - SVGs (the logo) get optimized rather than converted
+#   - filenames get slugified, so "J&CM Big Band (final) copy 2.JPG" becomes a
+#     clean URL instead of something that breaks links
+media_libraries:
+  all:
+    transformations:
+      raster_image:
+        format: webp
+        quality: 85
+        width: 2048
+        height: 2048
+      svg:
+        optimize: true
+  default:
+    config:
+      slugify_filename: true
+
 site_url: https://unlvjazz.netlify.app
 
 # Saves go straight to main and publish on the next build. The alternative
@@ -65,6 +88,57 @@ collections:
   - name: content
     label: Site content
     files:
+      - name: settings
+        label: Logo & homepage photo
+        file: src/content/settings.json
+        description: >-
+          The site logo and the large photo on the homepage. Both are optional —
+          leave a photo blank and the page simply renders without it, nothing
+          breaks. Uploads are automatically converted to WebP and resized, so
+          you can drop in a full-size press photo without worrying about it.
+        fields:
+          - name: logo
+            label: Site logo
+            widget: object
+            fields:
+              - name: src
+                label: Logo image
+                widget: image
+                required: false
+                hint: >-
+                  An SVG or PNG with a transparent background works best. The
+                  program's logos are in the J&CM Logos folder on the shared
+                  Drive. Leave blank to show the program name as text instead.
+              - name: alt
+                label: Alt text
+                widget: string
+                hint: >-
+                  What a screen reader announces. For a logo this is just the
+                  program name.
+          - name: hero
+            label: Homepage photo
+            widget: object
+            fields:
+              - name: src
+                label: Photo
+                widget: image
+                required: false
+                hint: >-
+                  A wide performance shot works best. Try the J&CM Press Photos
+                  folder on the shared Drive.
+              - name: alt
+                label: Alt text
+                widget: string
+                required: false
+                hint: >-
+                  Describe what is happening in the photo for people who can't
+                  see it — "Jazz Ensemble I performing at Artemus W. Ham Hall",
+                  not "photo" or "hero image".
+              - name: credit
+                label: Photographer credit
+                widget: string
+                required: false
+
       - name: ensembles
         label: Ensembles
         file: src/content/ensembles.json
@@ -91,6 +165,19 @@ collections:
                 hint: >-
                   Written for concert-goers and donors — what the group is and
                   what it plays. Audition questions are handled by unlv.edu/music.
+              - name: photo
+                label: Photo
+                widget: object
+                required: false
+                fields:
+                  - { name: src, label: Photo, widget: image, required: false }
+                  - name: alt
+                    label: Alt text
+                    widget: string
+                    required: false
+                    hint: >-
+                      Describe the photo for people who can't see it, e.g.
+                      "Latin Jazz Ensemble on stage at Clark County Library".
 
       - name: faculty
         label: Faculty

@@ -30,6 +30,15 @@ const scheduleFor = (name: string) =>
         const dates = scheduleFor(ensemble.name);
         return (
           <section class="ensemble">
+            {ensemble.photo?.src && (
+              <img
+                class="ensemble-photo"
+                src={ensemble.photo.src}
+                alt={ensemble.photo.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             <h2>{ensemble.name}</h2>
             <p class="ensemble-directors">
               {ensemble.directors.length > 1 ? 'Directors' : 'Director'}:{' '}
@@ -70,6 +79,15 @@ const scheduleFor = (name: string) =>
     .ensemble {
       border-left: 3px solid var(--accent);
       padding-left: 1.1rem;
+    }
+
+    .ensemble-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 34rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
     }
 
     .ensemble h2 {

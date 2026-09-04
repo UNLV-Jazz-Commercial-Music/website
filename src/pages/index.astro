@@ -2,19 +2,31 @@
 import Base from '../layouts/Base.astro';
 import EventList from '../components/EventList.astro';
 import { loadUpcomingEvents } from '../lib/events';
+import { hero } from '../data/settings';
 
 const upcoming = await loadUpcomingEvents(3);
 ---
 
 <Base
   title="Home"
-  description="Jazz and commercial music at the University of Nevada, Las Vegas — three big bands, ten combos, vocal, guitar, Latin and contemporary jazz ensembles."
+  description="Jazz and commercial music at the University of Nevada, Las Vegas — big bands, vocal jazz, Latin jazz, contemporary jazz, and more than fifty years of it."
 >
+  {
+    /* Optional. No photo uploaded means no hero — the page just starts at the
+       heading, with no gap and no broken image. */
+    hero && (
+      <figure class="hero">
+        <img src={hero.src} alt={hero.alt} loading="eager" decoding="async" />
+        {hero.credit && <figcaption>Photo: {hero.credit}</figcaption>}
+      </figure>
+    )
+  }
+
   <h1>UNLV Jazz &amp; Commercial Music</h1>
 
   <p class="lede">
-    Three big bands, ten combos, and vocal, guitar, Latin and contemporary jazz
-    ensembles, performing across Las Vegas and beyond.
+    Eight ensembles, more than fifty years, and a release nearly every year.
+    Our students study with working professionals and perform across Las Vegas.
   </p>
 
   <h2>Upcoming performances</h2>
@@ -25,4 +37,23 @@ const upcoming = await loadUpcomingEvents(3);
   />
 
   {upcoming.length > 0 && <p><a href="/events">See all events</a></p>}
+
+  <style>
+    .hero {
+      margin: 0 0 2rem;
+    }
+
+    .hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .hero figcaption {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+    }
+  </style>
 </Base>

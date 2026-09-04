@@ -25,6 +25,8 @@ export interface Ensemble {
   name: string;
   directors: string[];
   description: string;
+  /** Optional. Blank `src` means no photo — the page renders without one. */
+  photo?: { src: string; alt: string };
 }
 
 export const ensembles: Ensemble[] = data.ensembles;
