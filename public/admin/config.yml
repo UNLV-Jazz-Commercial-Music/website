@@ -3,6 +3,14 @@
 # This is what turns "someone who can write code" into "anyone with the shared
 # login" for everything except events, which already live in the Google Sheet.
 #
+# ⚠️ AFTER EDITING THIS FILE, TELL EDITORS TO RELOAD /admin.
+# A save writes ONLY the fields the browser's loaded config knows about, and
+# silently drops everything else. Someone with /admin open from before a config
+# change will therefore wipe any field added since — this happened on
+# 2026-09-04, when a save deleted the `aliases` field from every ensemble and
+# detached three concerts. `npm run check` caught it; nothing on the page
+# looked wrong. Reload after config changes, and run the check afterwards.
+#
 # Editors go to /admin, sign in with GitHub, fill in forms, and hit Save. Saving
 # commits to this repo, which triggers a Netlify rebuild. Nobody sees a file.
 #
@@ -138,6 +146,93 @@ collections:
                 label: Photographer credit
                 widget: string
                 required: false
+
+      - name: about
+        label: About page
+        file: src/content/about.json
+        description: >-
+          Every word on the About page. Two things work inside any text box:
+          leave a blank line to start a new paragraph, and put *asterisks*
+          around album or magazine titles to italicise them — for example
+          *DownBeat* or *Double or Nothing*. Nothing else is interpreted, so
+          you can't break the page.
+        fields:
+          - name: lede
+            label: Opening paragraph
+            widget: text
+            hint: The first thing a visitor reads. Keep it short and concrete.
+          - name: degrees
+            label: Degrees offered
+            label_singular: Degree
+            widget: list
+            summary: '{{fields.level}}'
+            fields:
+              - { name: level, label: Degree, widget: string, hint: 'e.g. Master of Music' }
+              - name: programs
+                label: Programs
+                widget: string
+                hint: 'Separate several with " · " — e.g. Performance · Composition'
+          - name: curriculumNote
+            label: Curriculum paragraph
+            widget: text
+          - name: downbeatAwards
+            label: DownBeat awards won since 2010
+            widget: number
+            value_type: int
+            min: 0
+            hint: >-
+              Just the number — the page writes the sentence around it. It was
+              52 in 2025 and 53 after the 2026 win, so update it when the
+              program wins again.
+          - name: downbeatNote
+            label: What the DownBeat awards were for
+            widget: text
+            hint: >-
+              Continues the sentence after the number, so start mid-sentence —
+              "category wins and outstanding performance honors for..."
+          - name: otherRecognition
+            label: Other recognition
+            widget: text
+          - name: touringNote
+            label: Touring paragraph
+            widget: text
+            hint: Introduces the list of stages below, so it should end with a colon.
+          - name: stages
+            label: Festivals and venues performed at
+            label_singular: Festival or venue
+            widget: list
+            field: { name: stage, label: Name, widget: string }
+          - name: guestArtistsNote
+            label: Visiting artists paragraph
+            widget: text
+            hint: >-
+              Name a handful of the most recognizable here. The full list goes
+              below and sits behind a "show more" toggle.
+          - name: guestArtists
+            label: Full list of visiting artists and clinicians
+            label_singular: Artist
+            widget: list
+            field: { name: artist, label: Name, widget: string }
+          - name: vegasNote
+            label: Las Vegas work paragraph
+            widget: text
+          - name: vegasArtists
+            label: Artists students have performed with in Las Vegas
+            label_singular: Artist
+            widget: list
+            field: { name: artist, label: Name, widget: string }
+          - name: alumniNote
+            label: Alumni paragraph
+            widget: text
+            hint: Introduces the list below, so it should end with a colon.
+          - name: alumni
+            label: Where alumni work
+            label_singular: Band or artist
+            widget: list
+            field: { name: destination, label: Name, widget: string }
+          - name: alumniClosing
+            label: Closing line
+            widget: text
 
       - name: ensembles
         label: Ensembles

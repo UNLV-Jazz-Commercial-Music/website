@@ -2,108 +2,41 @@
 /**
  * About.
  *
- * SOURCE: a 2025 program press announcement supplied by Jaxon, reworded for the
- * web. The original was one long block of prose — the same "wall of text"
- * problem the audit flagged on the old site — so it's broken into scannable
- * sections here, with the very long name lists tucked into <details> so they're
- * available without dominating the page.
+ * All content comes from the CMS — see src/data/about.ts for the shape and the
+ * reasoning. This file is layout only; nothing here needs editing to change the
+ * words on the page.
  *
- * DownBeat count is 53, not the 52 in the 2025 press release. The 2026 album
- * liner notes say 53, and Renzon Maballo's 2026 arrangement award accounts for
- * the difference. Update this number when the program wins again.
+ * Originally written from a 2025 program press announcement, reworded for the
+ * web. The source was one unbroken block of prose — the same wall-of-text
+ * problem the audit flagged on the old site — so it's sectioned here, with the
+ * two very long name lists behind disclosure toggles: available on demand,
+ * not dominating the page.
  *
- * NAME SPELLINGS CORRECTED from the press release, all flagged to Jaxon:
- *   Katherine McFee    -> Katharine McPhee
- *   Tricia Yearwood    -> Trisha Yearwood
- *   Zach Brown         -> Zac Brown
- *   Kenny Warner       -> Kenny Werner
- *   Lionel Ritchie     -> Lionel Richie
- *   Gregg Bissonnette  -> Gregg Bissonette
- * If any of these were right as written, change them back and note it here.
+ * NAME SPELLINGS CORRECTED from that press release, all flagged to Jaxon:
+ *   Katherine McFee -> Katharine McPhee · Tricia Yearwood -> Trisha Yearwood
+ *   Zach Brown -> Zac Brown · Kenny Warner -> Kenny Werner
+ *   Lionel Ritchie -> Lionel Richie · Gregg Bissonnette -> Gregg Bissonette
  */
 import Base from '../../layouts/Base.astro';
-
-const degrees = [
-  { level: 'Bachelor of Music', programs: 'Instrumental Performance · Vocal Jazz Performance · Composition' },
-  { level: 'Master of Music', programs: 'Performance · Composition' },
-  { level: 'Doctor of Musical Arts', programs: 'Jazz Performance' },
-];
-
-const industryCourses = [
-  'The Business of Music',
-  'Film Scoring',
-  'Music Technology',
-  'Music Entrepreneurship',
-];
-
-const stages = [
-  'Jack Rudin Jazz Championship, Jazz at Lincoln Center',
-  'Monterey Jazz Festival',
-  'Reno Jazz Festival',
-  'Lionel Hampton Jazz Festival',
-  'Hawaii International Jazz Festival',
-  'The Midwest Clinic',
-  'Jazz Education Network Conference',
-  'The Kennedy Center, Washington D.C.',
-  'The Village Vanguard, New York City',
-  'The Jazz Bakery, Los Angeles',
-];
-
-const guestArtists = [
-  'Alan Ferber', 'Alexa Tarantino', 'Allen Vizzutti', 'Ben Vereen', 'Ben Wendel',
-  'Bernie Dresel', 'Bill Cunliffe', 'Bob McChesney', 'Bob Mintzer', 'Bob Sheppard',
-  'Bobby Shew', 'Brandon Fields', 'Carl Saunders', 'Chris Potter', 'Chuck Findley',
-  'Clay Jenkins', 'Clint Holmes', 'Dennis Mackrel', 'Don Cunningham', 'Ed Calle',
-  'Eric Marienthal', 'George Garzone', 'Gerald Clayton', 'Gilbert Castellanos',
-  'Gordon Goodwin', 'Gregg Bissonette', 'Gregg Field', 'Jeff Coffin', 'Jeff Hamilton',
-  'Joe LaBarbera', 'John Beasley', 'John Clayton', 'John Daversa', 'Kenny Rampton',
-  'Kenny Werner', 'Kirk Whalum', 'Manhattan Transfer', 'Marlena Shaw',
-  'Nnenna Freelon', 'Paul Taylor', 'Peter Erskine', 'Rich Perry', 'Take 6',
-  'Tal Cohen', 'Tia Fuller', 'Tim Hagans', 'Tom Scott', 'Tommy Igoe',
-  'Wayne Bergeron', 'Willie Jones III',
-];
-
-const vegasArtists = [
-  'Tony Bennett', 'Lady Gaga', 'Usher', 'Alicia Keys', 'John Legend',
-  'Adam Levine', 'Harry Connick Jr.', 'Garth Brooks', 'Zac Brown',
-  'Seth MacFarlane', 'Carrie Underwood', 'Katharine McPhee', 'Trisha Yearwood',
-  'Marvin Hamlisch', 'Ben Vereen', 'Manhattan Transfer', 'Take 6', 'Nnenna Freelon',
-];
-
-const alumniDestinations = [
-  'The Count Basie Orchestra',
-  'Jazz at Lincoln Center Orchestra, directed by Wynton Marsalis',
-  'The Maria Schneider Orchestra',
-  'The Mingus Big Band',
-  'The Saturday Night Live Band',
-  'The Dukes of Dixieland',
-  'John Scofield',
-  'Chicago',
-  'Lionel Richie',
-  'Santana',
-  'Celine Dion',
-  'Bette Midler',
-];
+import { about } from '../../data/about';
+import { paragraphs, inlineEmphasis } from '../../lib/text';
 ---
 
 <Base
   title="About"
-  description="More than 50 years of jazz and commercial music at UNLV — degrees from bachelor's through the DMA, 53 DownBeat Student Music Awards since 2010, and a faculty of working professionals."
+  description={`More than 50 years of jazz and commercial music at UNLV — degrees from bachelor's through the DMA, ${about.downbeatAwards} DownBeat Student Music Awards since 2010, and a faculty of working professionals.`}
 >
   <h1>About the program</h1>
 
-  <p class="lede">
-    UNLV's Jazz &amp; Commercial Music area has been running for more than fifty
-    years. It's taught by working professionals — players, composers and
-    arrangers active in the jazz and commercial music industries — which means
-    the room our students learn in is run by people who still do the job.
-  </p>
+  {paragraphs(about.lede).map((text, i) => (
+    <p class={i === 0 ? 'lede' : undefined} set:html={inlineEmphasis(text)} />
+  ))}
 
   <h2>Degrees</h2>
 
   <ul class="degrees">
     {
-      degrees.map((degree) => (
+      about.degrees.map((degree) => (
         <li>
           <span class="degree-level">{degree.level}</span>
           <span class="degree-programs">{degree.programs}</span>
@@ -112,85 +45,64 @@ const alumniDestinations = [
     }
   </ul>
 
-  <p>
-    Alongside the traditional grounding in music history and theory, the
-    curriculum is built for the industry students are actually walking into,
-    with courses in {industryCourses.slice(0, -1).join(', ')} and{' '}
-    {industryCourses.at(-1)}.
-  </p>
+  {paragraphs(about.curriculumNote).map((text) => <p set:html={inlineEmphasis(text)} />)}
 
   <h2>Recognition</h2>
 
   <p>
-    <strong>53 DownBeat Student Music Awards since 2010</strong> — category wins
-    and outstanding performance honors, for student compositions and
-    arrangements and for Jazz Ensemble I, the Jazz Vocal Ensemble, Studio Scarlet
-    Jazz Vocal Ensemble, the Latin Jazz Ensemble, the Joe Williams Honors
-    Quartet, and the Contemporary Jazz Ensemble.
+    <strong>
+      {about.downbeatAwards} DownBeat Student Music Awards since 2010
+    </strong>{' '}
+    — <span set:html={inlineEmphasis(about.downbeatNote)} />
   </p>
 
-  <p>
-    Jazz Ensemble I and the Honors Trio have both won the Monterey Next
-    Generation Jazz Festival. Individual students have taken regional and
-    divisional awards in the commercial music categories of the National
-    Association of Teachers of Singing. Our albums have drawn reviews in
-    <em>DownBeat</em> and <em>JazzTimes</em>, and our 2025 release
-    <em>Double or Nothing</em> received Grammy consideration.
-  </p>
+  {paragraphs(about.otherRecognition).map((text) => <p set:html={inlineEmphasis(text)} />)}
 
   <h2>Where we've played</h2>
 
-  <p>
-    The program has toured internationally throughout its history, including
-    trips to Europe, Africa, Japan and Australia, and has been invited to
-    perform at:
-  </p>
+  {paragraphs(about.touringNote).map((text) => <p set:html={inlineEmphasis(text)} />)}
 
   <ul class="stages">
-    {stages.map((stage) => <li>{stage}</li>)}
+    {about.stages.map((stage) => <li>{stage}</li>)}
   </ul>
 
   <h2>Who our students work with</h2>
 
-  <p>
-    Students have taken masterclasses, recorded and performed with artists
-    including Chris Potter, Bob Mintzer, Peter Erskine, Gerald Clayton, Tia
-    Fuller, Manhattan Transfer and Take 6.
-  </p>
+  {paragraphs(about.guestArtistsNote).map((text) => <p set:html={inlineEmphasis(text)} />)}
 
-  <details>
-    <summary>The full list of visiting artists and clinicians</summary>
-    <ul class="names">
-      {guestArtists.map((name) => <li>{name}</li>)}
-    </ul>
-  </details>
+  {
+    about.guestArtists.length > 0 && (
+      <details>
+        <summary>The full list of visiting artists and clinicians</summary>
+        <ul class="names">
+          {about.guestArtists.map((name) => <li>{name}</li>)}
+        </ul>
+      </details>
+    )
+  }
 
-  <p>
-    Because the program sits in Las Vegas, students also work professionally
-    while they study — playing for Academy, Tony and Grammy winners, and for
-    events including the Latin Grammy Awards and the Latin American Music
-    Awards.
-  </p>
+  {paragraphs(about.vegasNote).map((text) => <p set:html={inlineEmphasis(text)} />)}
 
-  <details>
-    <summary>Artists our students have performed with in Las Vegas</summary>
-    <ul class="names">
-      {vegasArtists.map((name) => <li>{name}</li>)}
-    </ul>
-  </details>
+  {
+    about.vegasArtists.length > 0 && (
+      <details>
+        <summary>Artists our students have performed with in Las Vegas</summary>
+        <ul class="names">
+          {about.vegasArtists.map((name) => <li>{name}</li>)}
+        </ul>
+      </details>
+    )
+  }
 
   <h2>Where our alumni go</h2>
 
-  <p>
-    Graduates lead their own bands and work as performers, composers and
-    arrangers with:
-  </p>
+  {paragraphs(about.alumniNote).map((text) => <p set:html={inlineEmphasis(text)} />)}
 
   <ul class="names names-wide">
-    {alumniDestinations.map((name) => <li>{name}</li>)}
+    {about.alumni.map((name) => <li>{name}</li>)}
   </ul>
 
-  <p>J&amp;CM alumni also teach at universities and colleges worldwide.</p>
+  {paragraphs(about.alumniClosing).map((text) => <p set:html={inlineEmphasis(text)} />)}
 
   <section class="aside-note">
     <h2>Applying</h2>

@@ -10,6 +10,7 @@
 
 import { parseEvents } from '../src/lib/events.ts';
 import { parseCsv } from '../src/lib/csv.ts';
+import { paragraphs, inlineEmphasis } from '../src/lib/text.ts';
 
 let failures = 0;
 
@@ -124,6 +125,37 @@ console.log('\nSlugs');
   const events = parseEvents(csv, '2026-09-03');
   check('slug is url-safe', events[0].slug, '2026-10-10-jazz-ensemble-i');
   check('duplicate bills on one day get distinct slugs', events[1].slug, '2026-10-10-jazz-ensemble-i-2');
+}
+
+console.log('\nAbout page text helpers');
+{
+  check('single blank line splits paragraphs', paragraphs('one\n\ntwo').length, 2);
+  check('single newline does not split', paragraphs('one\ntwo').length, 1);
+  check('trailing whitespace is trimmed', paragraphs('  one  \n\n  two  '), ['one', 'two']);
+  check('empty text yields no paragraphs', paragraphs('   '), []);
+
+  check(
+    'asterisks become italics',
+    inlineEmphasis('reviews in *DownBeat* and *JazzTimes*'),
+    'reviews in <em>DownBeat</em> and <em>JazzTimes</em>',
+  );
+  check('an unmatched asterisk is left alone', inlineEmphasis('4 * 5'), '4 * 5');
+  check('emphasis does not span a line break', inlineEmphasis('*one\ntwo*'), '*one\ntwo*');
+
+  // The important ones: this function emits raw HTML, so escaping must happen
+  // first or CMS content could inject markup into the page.
+  check(
+    'script tags are escaped, not executed',
+    inlineEmphasis('<script>alert(1)</script>'),
+    '&lt;script&gt;alert(1)&lt;/script&gt;',
+  );
+  check('ampersands are escaped', inlineEmphasis('Jazz & Commercial'), 'Jazz &amp; Commercial');
+  check('quotes are escaped', inlineEmphasis('say \"hi\"'), 'say &quot;hi&quot;');
+  check(
+    'markup inside emphasis is still escaped',
+    inlineEmphasis('*<b>bold</b>*'),
+    '<em>&lt;b&gt;bold&lt;/b&gt;</em>',
+  );
 }
 
 console.log(
