@@ -1,0 +1,285 @@
+---
+/**
+ * About.
+ *
+ * SOURCE: a 2025 program press announcement supplied by Jaxon, reworded for the
+ * web. The original was one long block of prose — the same "wall of text"
+ * problem the audit flagged on the old site — so it's broken into scannable
+ * sections here, with the very long name lists tucked into <details> so they're
+ * available without dominating the page.
+ *
+ * DownBeat count is 53, not the 52 in the 2025 press release. The 2026 album
+ * liner notes say 53, and Renzon Maballo's 2026 arrangement award accounts for
+ * the difference. Update this number when the program wins again.
+ *
+ * NAME SPELLINGS CORRECTED from the press release, all flagged to Jaxon:
+ *   Katherine McFee    -> Katharine McPhee
+ *   Tricia Yearwood    -> Trisha Yearwood
+ *   Zach Brown         -> Zac Brown
+ *   Kenny Warner       -> Kenny Werner
+ *   Lionel Ritchie     -> Lionel Richie
+ *   Gregg Bissonnette  -> Gregg Bissonette
+ * If any of these were right as written, change them back and note it here.
+ */
+import Base from '../../layouts/Base.astro';
+
+const degrees = [
+  { level: 'Bachelor of Music', programs: 'Instrumental Performance · Vocal Jazz Performance · Composition' },
+  { level: 'Master of Music', programs: 'Performance · Composition' },
+  { level: 'Doctor of Musical Arts', programs: 'Jazz Performance' },
+];
+
+const industryCourses = [
+  'The Business of Music',
+  'Film Scoring',
+  'Music Technology',
+  'Music Entrepreneurship',
+];
+
+const stages = [
+  'Jack Rudin Jazz Championship, Jazz at Lincoln Center',
+  'Monterey Jazz Festival',
+  'Reno Jazz Festival',
+  'Lionel Hampton Jazz Festival',
+  'Hawaii International Jazz Festival',
+  'The Midwest Clinic',
+  'Jazz Education Network Conference',
+  'The Kennedy Center, Washington D.C.',
+  'The Village Vanguard, New York City',
+  'The Jazz Bakery, Los Angeles',
+];
+
+const guestArtists = [
+  'Alan Ferber', 'Alexa Tarantino', 'Allen Vizzutti', 'Ben Vereen', 'Ben Wendel',
+  'Bernie Dresel', 'Bill Cunliffe', 'Bob McChesney', 'Bob Mintzer', 'Bob Sheppard',
+  'Bobby Shew', 'Brandon Fields', 'Carl Saunders', 'Chris Potter', 'Chuck Findley',
+  'Clay Jenkins', 'Clint Holmes', 'Dennis Mackrel', 'Don Cunningham', 'Ed Calle',
+  'Eric Marienthal', 'George Garzone', 'Gerald Clayton', 'Gilbert Castellanos',
+  'Gordon Goodwin', 'Gregg Bissonette', 'Gregg Field', 'Jeff Coffin', 'Jeff Hamilton',
+  'Joe LaBarbera', 'John Beasley', 'John Clayton', 'John Daversa', 'Kenny Rampton',
+  'Kenny Werner', 'Kirk Whalum', 'Manhattan Transfer', 'Marlena Shaw',
+  'Nnenna Freelon', 'Paul Taylor', 'Peter Erskine', 'Rich Perry', 'Take 6',
+  'Tal Cohen', 'Tia Fuller', 'Tim Hagans', 'Tom Scott', 'Tommy Igoe',
+  'Wayne Bergeron', 'Willie Jones III',
+];
+
+const vegasArtists = [
+  'Tony Bennett', 'Lady Gaga', 'Usher', 'Alicia Keys', 'John Legend',
+  'Adam Levine', 'Harry Connick Jr.', 'Garth Brooks', 'Zac Brown',
+  'Seth MacFarlane', 'Carrie Underwood', 'Katharine McPhee', 'Trisha Yearwood',
+  'Marvin Hamlisch', 'Ben Vereen', 'Manhattan Transfer', 'Take 6', 'Nnenna Freelon',
+];
+
+const alumniDestinations = [
+  'The Count Basie Orchestra',
+  'Jazz at Lincoln Center Orchestra, directed by Wynton Marsalis',
+  'The Maria Schneider Orchestra',
+  'The Mingus Big Band',
+  'The Saturday Night Live Band',
+  'The Dukes of Dixieland',
+  'John Scofield',
+  'Chicago',
+  'Lionel Richie',
+  'Santana',
+  'Celine Dion',
+  'Bette Midler',
+];
+---
+
+<Base
+  title="About"
+  description="More than 50 years of jazz and commercial music at UNLV — degrees from bachelor's through the DMA, 53 DownBeat Student Music Awards since 2010, and a faculty of working professionals."
+>
+  <h1>About the program</h1>
+
+  <p class="lede">
+    UNLV's Jazz &amp; Commercial Music area has been running for more than fifty
+    years. It's taught by working professionals — players, composers and
+    arrangers active in the jazz and commercial music industries — which means
+    the room our students learn in is run by people who still do the job.
+  </p>
+
+  <h2>Degrees</h2>
+
+  <ul class="degrees">
+    {
+      degrees.map((degree) => (
+        <li>
+          <span class="degree-level">{degree.level}</span>
+          <span class="degree-programs">{degree.programs}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p>
+    Alongside the traditional grounding in music history and theory, the
+    curriculum is built for the industry students are actually walking into,
+    with courses in {industryCourses.slice(0, -1).join(', ')} and{' '}
+    {industryCourses.at(-1)}.
+  </p>
+
+  <h2>Recognition</h2>
+
+  <p>
+    <strong>53 DownBeat Student Music Awards since 2010</strong> — category wins
+    and outstanding performance honors, for student compositions and
+    arrangements and for Jazz Ensemble I, the Jazz Vocal Ensemble, Studio Scarlet
+    Jazz Vocal Ensemble, the Latin Jazz Ensemble, the Joe Williams Honors
+    Quartet, and the Contemporary Jazz Ensemble.
+  </p>
+
+  <p>
+    Jazz Ensemble I and the Honors Trio have both won the Monterey Next
+    Generation Jazz Festival. Individual students have taken regional and
+    divisional awards in the commercial music categories of the National
+    Association of Teachers of Singing. Our albums have drawn reviews in
+    <em>DownBeat</em> and <em>JazzTimes</em>, and our 2025 release
+    <em>Double or Nothing</em> received Grammy consideration.
+  </p>
+
+  <h2>Where we've played</h2>
+
+  <p>
+    The program has toured internationally throughout its history, including
+    trips to Europe, Africa, Japan and Australia, and has been invited to
+    perform at:
+  </p>
+
+  <ul class="stages">
+    {stages.map((stage) => <li>{stage}</li>)}
+  </ul>
+
+  <h2>Who our students work with</h2>
+
+  <p>
+    Students have taken masterclasses, recorded and performed with artists
+    including Chris Potter, Bob Mintzer, Peter Erskine, Gerald Clayton, Tia
+    Fuller, Manhattan Transfer and Take 6.
+  </p>
+
+  <details>
+    <summary>The full list of visiting artists and clinicians</summary>
+    <ul class="names">
+      {guestArtists.map((name) => <li>{name}</li>)}
+    </ul>
+  </details>
+
+  <p>
+    Because the program sits in Las Vegas, students also work professionally
+    while they study — playing for Academy, Tony and Grammy winners, and for
+    events including the Latin Grammy Awards and the Latin American Music
+    Awards.
+  </p>
+
+  <details>
+    <summary>Artists our students have performed with in Las Vegas</summary>
+    <ul class="names">
+      {vegasArtists.map((name) => <li>{name}</li>)}
+    </ul>
+  </details>
+
+  <h2>Where our alumni go</h2>
+
+  <p>
+    Graduates lead their own bands and work as performers, composers and
+    arrangers with:
+  </p>
+
+  <ul class="names names-wide">
+    {alumniDestinations.map((name) => <li>{name}</li>)}
+  </ul>
+
+  <p>J&amp;CM alumni also teach at universities and colleges worldwide.</p>
+
+  <section class="aside-note">
+    <h2>Applying</h2>
+    <p>
+      Degree requirements, audition dates and admissions are handled by the UNLV
+      School of Music. Everything you need is at{' '}
+      <a href="https://www.unlv.edu/music">unlv.edu/music</a>.
+    </p>
+  </section>
+
+  <style>
+    .degrees {
+      list-style: none;
+      padding: 0;
+      max-width: 46rem;
+    }
+
+    .degrees li {
+      display: grid;
+      gap: 0.1rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .degree-level {
+      font-weight: 600;
+    }
+
+    .degree-programs {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    .stages {
+      max-width: 46rem;
+      padding-left: 1.2rem;
+    }
+
+    .stages li {
+      margin-bottom: 0.3rem;
+    }
+
+    details {
+      margin: 1rem 0 1.5rem;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      background: var(--panel);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .names {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      columns: 16rem;
+      column-gap: 2rem;
+    }
+
+    .names li {
+      padding: 0.15rem 0;
+      break-inside: avoid;
+    }
+
+    .names-wide {
+      columns: 22rem;
+      margin-top: 0.5rem;
+    }
+
+    .aside-note {
+      margin-top: 3rem;
+      padding: 1.25rem;
+      background: var(--panel);
+      border-radius: 6px;
+    }
+
+    .aside-note h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+
+    .aside-note p {
+      margin-bottom: 0;
+      max-width: 46rem;
+    }
+  </style>
+</Base>
