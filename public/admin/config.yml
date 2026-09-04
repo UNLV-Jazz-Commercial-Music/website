@@ -6,11 +6,25 @@
 # Editors go to /admin, sign in with GitHub, fill in forms, and hit Save. Saving
 # commits to this repo, which triggers a Netlify rebuild. Nobody sees a file.
 #
-# SETUP REQUIRED ONCE, IN NETLIFY:
-#   Site configuration -> Access & security -> OAuth -> Install provider -> GitHub
-# That is what lets the login work. Without it, /admin loads but sign-in fails.
-# This is the single reason Netlify was chosen over Cloudflare Pages: it provides
-# this OAuth proxy free, and the alternative was building and maintaining one.
+# SETUP REQUIRED ONCE — TWO PARTS, IN THIS ORDER:
+#
+#  1. On GitHub, register an OAuth App (Settings -> Developer Settings ->
+#     OAuth Apps -> Register a new application). The one field that must be
+#     exact is:
+#         Authorization callback URL:  https://api.netlify.com/auth/done
+#     Note the Client ID, then generate a Client Secret. GitHub shows the
+#     secret once; it can be regenerated any time if lost.
+#
+#  2. In Netlify: Project configuration -> Access & security -> OAuth ->
+#     Install Provider -> GitHub, and paste in that Client ID and Secret.
+#
+# Without this, /admin loads but sign-in fails. This is the single reason
+# Netlify was chosen over Cloudflare Pages: it acts as the OAuth client for
+# free, and the alternative was building and maintaining one ourselves.
+#
+# Sveltia also offers "Sign In with Token" using a GitHub personal access
+# token, which needs no OAuth setup at all. That's fine for a developer testing
+# the CMS, but not for faculty — hence the OAuth route above.
 #
 # WHY JSON FILES RATHER THAN A DATABASE:
 # Content stays in this repo as plain data. If this CMS were abandoned tomorrow,
@@ -22,9 +36,18 @@ backend:
   name: github
   repo: UNLV-Jazz-Commercial-Music/website
   branch: main
-  # Netlify's OAuth proxy. Requires the GitHub provider installed (see above).
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  #
+  # DO NOT ADD `base_url` HERE.
+  #
+  # Sveltia uses Netlify as its OAuth client by DEFAULT, with no configuration
+  # needed. And unlike Decap/Netlify CMS — where `base_url` meant the OAuth
+  # proxy — in Sveltia `base_url` means the GitHub *instance* URL, for GitHub
+  # Enterprise. Setting it to api.netlify.com (as this file briefly did) tells
+  # Sveltia to treat Netlify's API as a self-hosted GitHub server, and login
+  # fails in a confusing way.
+  #
+  # If we ever move off Netlify, `base_url` is where a replacement OAuth client
+  # goes — Sveltia publishes its own, deployable to Cloudflare Workers.
 
 # Where uploaded images land. media_folder is the path in the repo;
 # public_folder is how the site refers to them in HTML.
