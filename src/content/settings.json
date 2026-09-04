@@ -1,11 +1,11 @@
 {
   "logo": {
-    "src": "",
+    "src": "/uploads/j-cm-black-logo.webp",
     "alt": "UNLV Jazz & Commercial Music"
   },
   "hero": {
-    "src": "",
-    "alt": "",
-    "credit": ""
+    "src": "/uploads/img_1900.webp",
+    "alt": "A close snapshot from the Fall 2025 Jazz Festival at Artemus W. Ham Hall",
+    "credit": "Miranda Johnson"
   }
 }
