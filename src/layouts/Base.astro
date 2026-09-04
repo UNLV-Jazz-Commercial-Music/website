@@ -13,6 +13,8 @@
  * needs touching.
  */
 
+import { SEARCH_ENGINES_ALLOWED } from '../site';
+
 interface Props {
   title?: string;
   description?: string;
@@ -42,6 +44,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
+    {
+      /* Keeps an unfinished site out of search results. Flip the switch in
+         src/site.ts at launch. */
+      !SEARCH_ENGINES_ALLOWED && <meta name="robots" content="noindex, nofollow" />
+    }
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
