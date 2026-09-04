@@ -1,0 +1,33 @@
+{
+  "professors": [
+    {
+      "name": "David Loeb",
+      "credentials": "M.M.",
+      "role": "David Mulkey MD and Laura Taylor Mulkey Endowed Chair of Jazz and Commercial Music"
+    },
+    {
+      "name": "Nathan Tanouye",
+      "credentials": "M.M.",
+      "role": "Professor of Jazz and Commercial Music, Studio Trombone · Area Co-coordinator"
+    },
+    {
+      "name": "Adam Schroeder",
+      "credentials": "M.M.",
+      "role": "Associate Professor · Area Co-coordinator · Saxophone, Improvisation, Jazz Combos"
+    }
+  ],
+  "adjunct": [
+    { "name": "James Anderson", "role": "Jazz Violin" },
+    { "name": "Steve Flora", "credentials": "B.M.", "role": "Jazz Bass" },
+    { "name": "Gary Fowler", "role": "Jazz Voice, Vocal Jazz Ensembles" },
+    { "name": "Uli Geissendoerfer", "role": "Jazz Piano" },
+    { "name": "Jose “Pepe” Jimenez", "role": "Jazz Drums and Percussion, Latin Jazz Ensemble" },
+    { "name": "Rick Keller", "role": "Music Technology, Jazz Saxophone, Jazz Composition" },
+    { "name": "Jake Langley", "role": "Jazz Guitar" },
+    { "name": "Peter Margulies", "role": "Jazz Trumpet" },
+    { "name": "Carlos Mata", "role": "Jazz Composition, Jazz Saxophone" },
+    { "name": "Lara Vivian Smith", "role": "Jazz Voice, Vocal Jazz Ensembles" },
+    { "name": "Julian Tanaka", "role": "Jazz Composition, Jazz Saxophone, Contemporary Jazz Ensemble" },
+    { "name": "JoBelle Yonely", "role": "Jazz Voice" }
+  ]
+}

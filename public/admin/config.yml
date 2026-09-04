@@ -1,0 +1,149 @@
+# Sveltia CMS configuration.
+#
+# This is what turns "someone who can write code" into "anyone with the shared
+# login" for everything except events, which already live in the Google Sheet.
+#
+# Editors go to /admin, sign in with GitHub, fill in forms, and hit Save. Saving
+# commits to this repo, which triggers a Netlify rebuild. Nobody sees a file.
+#
+# SETUP REQUIRED ONCE, IN NETLIFY:
+#   Site configuration -> Access & security -> OAuth -> Install provider -> GitHub
+# That is what lets the login work. Without it, /admin loads but sign-in fails.
+# This is the single reason Netlify was chosen over Cloudflare Pages: it provides
+# this OAuth proxy free, and the alternative was building and maintaining one.
+#
+# WHY JSON FILES RATHER THAN A DATABASE:
+# Content stays in this repo as plain data. If this CMS were abandoned tomorrow,
+# the site keeps running and nothing is lost — that is the whole reason for
+# choosing a git-based CMS over a hosted one, after Weebly took the old site's
+# content with it.
+
+backend:
+  name: github
+  repo: UNLV-Jazz-Commercial-Music/website
+  branch: main
+  # Netlify's OAuth proxy. Requires the GitHub provider installed (see above).
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Where uploaded images land. media_folder is the path in the repo;
+# public_folder is how the site refers to them in HTML.
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://unlvjazz.netlify.app
+
+# Saves go straight to main and publish on the next build. The alternative
+# (editorial_workflow) adds a draft/review step via pull requests, which is more
+# process than a program website needs and one more thing to explain at handoff.
+publish_mode: simple
+
+collections:
+  - name: content
+    label: Site content
+    files:
+      - name: ensembles
+        label: Ensembles
+        file: src/content/ensembles.json
+        description: >-
+          The eight active ensembles. IMPORTANT: each name must match the
+          ensemble names used in the events Google Sheet exactly, because that
+          text is how an ensemble finds its own upcoming concerts. Rename one
+          here and you must rename it in the Sheet's dropdown too.
+        fields:
+          - name: ensembles
+            label: Ensembles
+            label_singular: Ensemble
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: name, label: Name, widget: string }
+              - name: directors
+                label: Directors
+                widget: list
+                field: { name: director, label: Director, widget: string }
+              - name: description
+                label: Description
+                widget: text
+                hint: >-
+                  Written for concert-goers and donors — what the group is and
+                  what it plays. Audition questions are handled by unlv.edu/music.
+
+      - name: faculty
+        label: Faculty
+        file: src/content/faculty.json
+        description: >-
+          Names and teaching assignments only. Bios deliberately link out to the
+          UNLV School of Music directory so there is one authoritative source
+          rather than a copy here that drifts out of date. Please do not paste
+          bios in. Individual email addresses are also left off on purpose.
+        fields:
+          - name: professors
+            label: Professors
+            label_singular: Professor
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: credentials, label: Credentials, widget: string, required: false, hint: 'e.g. M.M.' }
+              - { name: role, label: Title or role, widget: string }
+          - name: adjunct
+            label: Adjunct faculty
+            label_singular: Adjunct faculty member
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: credentials, label: Credentials, widget: string, required: false }
+              - { name: role, label: Instruments and ensembles taught, widget: string }
+
+      - name: albums
+        label: Discography
+        file: src/content/albums.json
+        description: >-
+          Every release, newest first. Keep this current — the old website's
+          discography stopped at 2017 and made the program look like it had
+          quit recording for eight years.
+        fields:
+          - { name: bandcampUrl, label: Bandcamp page, widget: string }
+          - name: albums
+            label: Albums
+            label_singular: Album
+            widget: list
+            summary: '{{fields.title}} ({{fields.year}})'
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: year, label: Year, widget: number, value_type: int, min: 1970, max: 2100 }
+              - { name: artist, label: Performing ensemble, widget: string, required: false }
+              - { name: note, label: Note, widget: text, required: false, hint: 'Guest artists, awards, reviews.' }
+              - { name: label, label: Record label, widget: string, required: false }
+              - { name: catalogNumber, label: Catalog number, widget: string, required: false }
+              - { name: url, label: Listen or buy link, widget: string, required: false }
+              - { name: cover, label: Cover image, widget: image, required: false }
+              - name: tracks
+                label: Track listing
+                label_singular: Track
+                widget: list
+                required: false
+                summary: '{{fields.title}}'
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: composer, label: Composer, widget: string, required: false }
+                  - { name: arranger, label: Arranger, widget: string, required: false }
+
+      - name: supporters
+        label: Special thanks
+        file: src/content/supporters.json
+        description: >-
+          Recognition list for the Support page, taken from the concert program.
+          Get the names exactly right — a misspelled donor is worse than no
+          recognition section.
+        fields:
+          - name: supporters
+            label: Supporters
+            label_singular: Supporter
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: url, label: Website, widget: string, required: false }

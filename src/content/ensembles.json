@@ -1,0 +1,44 @@
+{
+  "ensembles": [
+    {
+      "name": "Jazz Ensemble I",
+      "directors": ["Dave Loeb", "Nathan Tanouye"],
+      "description": "The program’s flagship big band, and the group that carries our name at festivals and on record. It headlines both the fall and spring jazz festivals and anchors the annual album release."
+    },
+    {
+      "name": "Jazz Ensemble II",
+      "directors": ["Gabriel Carpenter"],
+      "description": "Our second big band, performing a full concert season of its own alongside the vocal ensembles. Many players move up through this group into Jazz Ensemble I."
+    },
+    {
+      "name": "Contemporary Jazz Ensemble",
+      "directors": ["Julian Tanaka"],
+      "description": "Focused on modern and contemporary jazz writing, including music by our own composition students."
+    },
+    {
+      "name": "Latin Jazz Ensemble",
+      "directors": ["Jose Jimenez-Castro"],
+      "description": "Afro-Cuban, Brazilian and Latin jazz repertoire. The ensemble has recorded three albums in the Latin Journey series."
+    },
+    {
+      "name": "Studio Scarlet Jazz Vocal Ensemble",
+      "directors": ["Lara Vivian Smith"],
+      "description": "A vocal jazz ensemble performing both on campus and in the community, appearing regularly on our Clark County Library series."
+    },
+    {
+      "name": "Maryland Parkway Jazz Vocal Ensemble",
+      "directors": ["Gary Fowler"],
+      "description": "A vocal jazz ensemble named for the street that runs alongside campus, sharing programs with our big bands and appearing on the annual Vocal Jazz Night."
+    },
+    {
+      "name": "Joe Williams Scholarship Quintet",
+      "directors": ["Dave Loeb"],
+      "description": "A small group of scholarship students performing as a working jazz quintet, on campus and throughout Las Vegas."
+    },
+    {
+      "name": "Joe Williams Scholarship Combo",
+      "directors": ["Dave Loeb"],
+      "description": "The second of our two Joe Williams Scholarship small groups, performing across the concert season."
+    }
+  ]
+}
