@@ -1,73 +1,76 @@
 {
   "supporters": [
     {
-      "name": "The Joe Williams Every Day Foundation"
+      "name": "The Joe Williams Every Day Foundation",
+      "url": "http://www.jwedf.org/"
     },
     {
-      "name": "Clint Holmes, Naomi Mauro, Melanie Moore, Nick Mastrangelo"
+      "name": "Randy Garcia and the Investment Counsel Company",
+      "url": "https://iccnv.com/"
     },
     {
-      "name": "Randy Garcia and the Investment Counsel Company"
+      "name": "Doug & Lynn Small",
+      "url": ""
     },
     {
-      "name": "Doug & Lynn Small"
+      "name": "Jake Garehime Jazz Scholarships",
+      "url": ""
     },
     {
-      "name": "Jake Garehime Jazz Scholarships"
+      "name": "The Isabelle Emerson Jazz Scholarship Fund",
+      "url": ""
     },
     {
-      "name": "The Isabelle Emerson Jazz Scholarship Fund"
+      "name": "The Patterson Foundation",
+      "url": ""
     },
     {
-      "name": "The Patterson Foundation"
+      "name": "The Jay Morrison Jazz Scholarships",
+      "url": ""
     },
     {
-      "name": "The Jay Morrison Jazz Scholarships"
+      "name": "Las Vegas Jazz Society",
+      "url": "https://lvjs.org/"
     },
     {
-      "name": "Las Vegas Jazz Society"
+      "name": "The UNLV Recording Studio Staff",
+      "url": ""
     },
     {
-      "name": "The UNLV Recording Studio Staff"
+      "name": "The William & Carol McLeod Scholarship Fund",
+      "url": ""
     },
     {
-      "name": "The William & Carol McLeod Scholarship Fund"
+      "name": "Sue and Paul Coladarci Jazz Scholarship Fund",
+      "url": ""
     },
     {
-      "name": "Dave Viger"
+      "name": "KUNV",
+      "url": "https://www.unlv.edu/kunv"
     },
     {
-      "name": "Sue and Paul Coladarci Jazz Scholarship Fund"
+      "name": "Suzanne Scott and the Clark County Library District",
+      "url": "https://thelibrarydistrict.org/"
     },
     {
-      "name": "KUNV"
+      "name": "Jeff Williams, Coordinator of Secondary Fine Arts, Clark County School District",
+      "url": ""
     },
     {
-      "name": "Thomas Bridge"
+      "name": "The Forgotten Song Foundation",
+      "url": "https://forgottensongmusic.com/forgotten-song-foundation-inc/"
     },
     {
-      "name": "Suzanne Scott and the Clark County Library District"
+      "name": "Laura Taylor & David Mulkey",
+      "url": ""
     },
     {
-      "name": "Jeff Williams, Coordinator of Secondary Fine Arts, Clark County School District"
+      "name": "Curt & Elaine Miller Endowed Scholarship for Jazz and Commercial Music",
+      "url": ""
     },
     {
-      "name": "Ann Parenti"
-    },
-    {
-      "name": "The Forgotten Song Foundation"
-    },
-    {
-      "name": "Laura Taylor & David Mulkey"
-    },
-    {
-      "name": "Curt & Elaine Miller Endowed Scholarship for Jazz and Commercial Music"
-    },
-    {
-      "name": "Robert & Shirley Kramer"
-    },
-    {
-      "name": "Friends of UNLV Jazz"
+      "name": "Friends of UNLV Jazz",
+      "url": ""
     }
   ]
 }
