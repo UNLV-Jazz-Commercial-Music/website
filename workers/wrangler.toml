@@ -1,0 +1,20 @@
+# Cloudflare Worker that triggers the nightly site rebuild.
+#
+# Deploy from this directory:
+#   npx wrangler secret put DEPLOY_HOOK_URL   # paste the Pages deploy hook URL
+#   npx wrangler deploy
+#
+# The deploy hook URL is a credential — anyone holding it can start builds. It
+# lives as a Worker secret, never in this file or the repo.
+
+name = "unlvjazz-nightly-rebuild"
+main = "nightly-rebuild.js"
+compatibility_date = "2026-09-04"
+
+# 10:00 UTC — 3:00 AM Pacific in summer, 2:00 AM in winter. A concert added to
+# the Sheet during the day is live by the next morning.
+#
+# Cloudflare cron triggers do not expire through inactivity, which is the whole
+# reason this moved off GitHub Actions.
+[triggers]
+crons = ["0 10 * * *"]

@@ -12,23 +12,25 @@
 # looked wrong. Reload after config changes, and run the check afterwards.
 #
 # Editors go to /admin, sign in with GitHub, fill in forms, and hit Save. Saving
-# commits to this repo, which triggers a Netlify rebuild. Nobody sees a file.
+# commits to this repo, which triggers a Cloudflare Pages rebuild. Nobody ever
+# sees a file.
 #
-# SETUP REQUIRED ONCE — TWO PARTS, IN THIS ORDER:
+# HOW THE LOGIN WORKS
 #
-#  1. On GitHub, register an OAuth App (Settings -> Developer Settings ->
-#     OAuth Apps -> Register a new application). The one field that must be
-#     exact is:
-#         Authorization callback URL:  https://api.netlify.com/auth/done
-#     Note the Client ID, then generate a Client Secret. GitHub shows the
-#     secret once; it can be regenerated any time if lost.
+# Content lives in this repo, so the CMS is host-independent — except for
+# authentication, which needs an OAuth client sitting between the browser and
+# GitHub. On Cloudflare that is the Sveltia CMS Authenticator, a Worker
+# maintained by the Sveltia team:
+#     https://github.com/sveltia/sveltia-cms-auth
 #
-#  2. In Netlify: Project configuration -> Access & security -> OAuth ->
-#     Install Provider -> GitHub, and paste in that Client ID and Secret.
+#  1. Deploy that Worker, following its repository's instructions. Give it the
+#     GitHub OAuth App's Client ID and Secret as Worker secrets.
+#  2. Update the GitHub OAuth App's callback URL to the Worker's URL. It used to
+#     point at https://api.netlify.com/auth/done and that stops working once
+#     Netlify is gone.
+#  3. Set `base_url` below to the Worker's URL.
 #
-# Without this, /admin loads but sign-in fails. This is the single reason
-# Netlify was chosen over Cloudflare Pages: it acts as the OAuth client for
-# free, and the alternative was building and maintaining one ourselves.
+# Full context in HOSTING.md, including why the site left Netlify.
 #
 # Sveltia also offers "Sign In with Token" using a GitHub personal access
 # token, which needs no OAuth setup at all. That's fine for a developer testing
@@ -45,17 +47,18 @@ backend:
   repo: UNLV-Jazz-Commercial-Music/website
   branch: main
   #
-  # DO NOT ADD `base_url` HERE.
+  # base_url must be set to the Sveltia CMS Authenticator Worker's URL once it
+  # is deployed. Uncomment and fill in:
   #
-  # Sveltia uses Netlify as its OAuth client by DEFAULT, with no configuration
-  # needed. And unlike Decap/Netlify CMS — where `base_url` meant the OAuth
-  # proxy — in Sveltia `base_url` means the GitHub *instance* URL, for GitHub
-  # Enterprise. Setting it to api.netlify.com (as this file briefly did) tells
-  # Sveltia to treat Netlify's API as a self-hosted GitHub server, and login
-  # fails in a confusing way.
+  #   base_url: https://YOUR-AUTHENTICATOR.workers.dev
   #
-  # If we ever move off Netlify, `base_url` is where a replacement OAuth client
-  # goes — Sveltia publishes its own, deployable to Cloudflare Workers.
+  # While the site was on Netlify this was deliberately ABSENT, because Sveltia
+  # defaults to Netlify as its OAuth client. Off Netlify, it is required.
+  #
+  # It must NEVER point at api.netlify.com. Unlike Decap/Netlify CMS — where
+  # base_url meant the OAuth proxy — in Sveltia it means the OAuth client URL,
+  # and pointing it at Netlify's API makes Sveltia treat that as a self-hosted
+  # GitHub server. Login then fails confusingly. See HOSTING.md.
 
 # Where uploaded images land. media_folder is the path in the repo;
 # public_folder is how the site refers to them in HTML.
@@ -85,7 +88,7 @@ media_libraries:
     config:
       slugify_filename: true
 
-site_url: https://unlvjazz.netlify.app
+site_url: https://unlvjazz.pages.dev
 
 # Saves go straight to main and publish on the next build. The alternative
 # (editorial_workflow) adds a draft/review step via pull requests, which is more
