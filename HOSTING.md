@@ -6,11 +6,12 @@ Everything about where this site lives and how it gets published.
 
 | | |
 |---|---|
-| **Host** | Cloudflare Pages |
+| **Host** | Cloudflare Workers (static assets) |
 | **Repo** | `UNLV-Jazz-Commercial-Music/website` (public) |
 | **Build command** | `npm run build` |
 | **Output directory** | `dist` |
 | **Node version** | pinned by `.node-version` (24) |
+| **URL** | https://unlvjazz.jazz-e41.workers.dev |
 
 Pushing to `main` triggers a build. That includes saves made in the CMS, which
 commit to `main` like any other change.
@@ -25,8 +26,11 @@ That is fatal for this particular site, because **every CMS save is a production
 deploy**. Faculty would have had roughly twenty content edits per month between
 all of them, on a site whose entire purpose is that they can edit it freely.
 
-Cloudflare Pages' free plan allows 500 builds a month with unmetered bandwidth.
-It also provides cron triggers, which fixed a second problem — see below.
+Cloudflare's free plan allows **3,000 build minutes a month** — at roughly a
+minute and a half per build, about 2,000 builds. **Requests to static assets are
+free and unlimited**, so visitor traffic costs nothing however popular the site
+gets. Cloudflare also provides cron triggers, which fixed a second problem —
+see below.
 
 The original reason for choosing Netlify was that it acted as the OAuth client
 for the CMS login for free. That convenience was real, but it cost 25x the
@@ -74,7 +78,7 @@ The site bakes events in at build time, so **editing the Sheet changes nothing
 until a rebuild happens.**
 
 `workers/nightly-rebuild.js` is a Cloudflare Worker on a cron trigger that pokes
-a Pages deploy hook at 10:00 UTC daily. It replaced a GitHub Actions scheduled
+a deploy hook at 10:00 UTC daily. It replaced a GitHub Actions scheduled
 workflow, which had a genuine flaw: GitHub disables scheduled workflows after
 60 days without repository activity. Faculty edit the Sheet, not the repo, so
 this repo going quiet for two months was likely — and rebuilds would have
@@ -84,15 +88,18 @@ Cloudflare cron triggers do not expire.
 
 ## Keeping deploys cheap
 
-Cloudflare's 500 builds a month is generous, but the habits still matter:
+Cloudflare's 3,000 build minutes a month is generous, but the habits still matter:
 
 - **Batch code changes.** One commit with five fixes costs one build; five
   commits cost five. On 2026-09-03 twenty-seven commits in a day exhausted a
   whole month of Netlify's allowance.
 - **CMS saves each cost a build.** That's expected and fine — it's what the
   budget is for.
-- **Preview and branch deploys are free** on Cloudflare, so experiment on a
-  branch rather than on `main`.
+- **Build minutes, not build count, is the metric.** A 90-second build costs 90
+  seconds of a 3,000-minute monthly budget.
+- Deployed as a **Worker with static assets**, which is Cloudflare's current
+  recommended path for static sites — not a Pages project. The docs for the two
+  differ; check the Workers ones.
 
 ## Checks before you trust a deploy
 

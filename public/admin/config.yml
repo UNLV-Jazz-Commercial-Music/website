@@ -12,7 +12,7 @@
 # looked wrong. Reload after config changes, and run the check afterwards.
 #
 # Editors go to /admin, sign in with GitHub, fill in forms, and hit Save. Saving
-# commits to this repo, which triggers a Cloudflare Pages rebuild. Nobody ever
+# commits to this repo, which triggers a Cloudflare rebuild. Nobody ever
 # sees a file.
 #
 # HOW THE LOGIN WORKS
@@ -88,7 +88,7 @@ media_libraries:
     config:
       slugify_filename: true
 
-site_url: https://unlvjazz.pages.dev
+site_url: https://unlvjazz.jazz-e41.workers.dev
 
 # Saves go straight to main and publish on the next build. The alternative
 # (editorial_workflow) adds a draft/review step via pull requests, which is more

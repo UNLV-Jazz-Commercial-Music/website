@@ -13,8 +13,9 @@
  * freezing the site on stale events. Cloudflare cron triggers do not expire.
  *
  * SETUP
- *   1. In Cloudflare Pages: Settings -> Builds & deployments -> Deploy hooks.
- *      Create one named "Nightly rebuild" on the main branch. Copy its URL.
+ *   1. In the Cloudflare dashboard: the site's Worker -> Settings -> Builds ->
+ *      Deploy hooks. Create one named "Nightly rebuild" on the main branch and
+ *      copy its URL.
  *   2. Store it as a secret on this Worker (never in this file — anyone with
  *      that URL can trigger builds):
  *        npx wrangler secret put DEPLOY_HOOK_URL
@@ -34,6 +35,8 @@ export default {
     const response = await fetch(env.DEPLOY_HOOK_URL, { method: 'POST' });
 
     // Cloudflare answers 200 or 201 when it accepts the build request.
+    // Deploy hooks are rate limited to 10/min per Worker, which one nightly
+    // trigger comes nowhere near.
     if (response.ok) {
       console.log(`Rebuild requested. Cloudflare responded ${response.status}.`);
     } else {

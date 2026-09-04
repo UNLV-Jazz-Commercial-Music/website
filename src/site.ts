@@ -19,7 +19,7 @@ export const SEARCH_ENGINES_ALLOWED = false;
 /**
  * Canonical origin. Update when the real domain is live.
  *
- * Currently a Cloudflare Pages default URL. See HOSTING.md for why the site
- * moved off Netlify on 2026-09-04.
+ * Currently the default Cloudflare Workers URL. See HOSTING.md for why the
+ * site moved off Netlify on 2026-09-04.
  */
-export const SITE_ORIGIN = 'https://unlvjazz.pages.dev';
+export const SITE_ORIGIN = 'https://unlvjazz.jazz-e41.workers.dev';
