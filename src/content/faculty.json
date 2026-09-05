@@ -17,17 +17,75 @@
     }
   ],
   "adjunct": [
-    { "name": "James Anderson", "role": "Jazz Violin" },
-    { "name": "Steve Flora", "credentials": "B.M.", "role": "Jazz Bass" },
-    { "name": "Gary Fowler", "role": "Jazz Voice, Vocal Jazz Ensembles" },
-    { "name": "Uli Geissendoerfer", "role": "Jazz Piano" },
-    { "name": "Jose “Pepe” Jimenez", "role": "Jazz Drums and Percussion, Latin Jazz Ensemble" },
-    { "name": "Rick Keller", "role": "Music Technology, Jazz Saxophone, Jazz Composition" },
-    { "name": "Jake Langley", "role": "Jazz Guitar" },
-    { "name": "Peter Margulies", "role": "Jazz Trumpet" },
-    { "name": "Carlos Mata", "role": "Jazz Composition, Jazz Saxophone" },
-    { "name": "Lara Vivian Smith", "role": "Jazz Voice, Vocal Jazz Ensembles" },
-    { "name": "Julian Tanaka", "role": "Jazz Composition, Jazz Saxophone, Contemporary Jazz Ensemble" },
-    { "name": "JoBelle Yonely", "role": "Jazz Voice" }
+    {
+      "name": "James Anderson",
+      "credentials": "",
+      "role": "Jazz Violin"
+    },
+    {
+      "name": "Steve Flora",
+      "credentials": "",
+      "role": "Jazz Bass"
+    },
+    {
+      "name": "Gary Fowler",
+      "credentials": "",
+      "role": "Jazz Voice, Vocal Jazz Ensembles"
+    },
+    {
+      "name": "Uli Geissendoerfer",
+      "credentials": "",
+      "role": "Jazz Piano"
+    },
+    {
+      "name": "Jose “Pepe” Jimenez",
+      "credentials": "",
+      "role": "Jazz Drums and Percussion, Latin Jazz Ensemble"
+    },
+    {
+      "name": "Rick Keller",
+      "credentials": "",
+      "role": "Music Technology, Jazz Saxophone, Jazz Composition"
+    },
+    {
+      "name": "Jake Langley",
+      "credentials": "",
+      "role": "Jazz Guitar"
+    },
+    {
+      "name": "Peter Margulies",
+      "credentials": "",
+      "role": "Jazz Trumpet"
+    },
+    {
+      "name": "Carlos Mata",
+      "credentials": "",
+      "role": "Jazz Composition, Jazz Saxophone"
+    },
+    {
+      "name": "Lara Vivian Smith",
+      "credentials": "",
+      "role": "Jazz Voice, Vocal Jazz Ensembles"
+    },
+    {
+      "name": "Julian Tanaka",
+      "credentials": "",
+      "role": "Jazz Composition, Jazz Saxophone, Contemporary Jazz Ensemble"
+    },
+    {
+      "name": "Rob WIlkerson",
+      "credentials": "",
+      "role": "Saxophone"
+    },
+    {
+      "name": "John Belzaguy",
+      "credentials": "",
+      "role": "Bass, Combos"
+    },
+    {
+      "name": "Patrick Hogan",
+      "credentials": "",
+      "role": "Piano"
+    }
   ]
 }
