@@ -93,6 +93,38 @@ to Netlify's OAuth client. Off Netlify, it becomes required. The comment in
 `config.yml` explains the trap: in Sveltia, `base_url` means the OAuth client
 URL only when you supply one; it must never point at `api.netlify.com`.
 
+### Two traps that cost hours during setup
+
+**Exactly ONE redirect URI on the GitHub OAuth App.**
+
+The authenticator does not send a `redirect_uri` parameter when it sends you to
+GitHub — the authorize URL carries only `client_id`, `scope` and `state`. GitHub
+therefore falls back to the OAuth App's registered callback, and **if more than
+one is registered it picks the first**, not the one you wanted.
+
+During the Netlify-to-Cloudflare move both were registered, on the theory that
+login would keep working on both hosts during the transition. It doesn't work
+that way: GitHub sent users to Netlify's callback with a state Netlify never
+issued, and login failed with `Invalid state key` — an error from Netlify, not
+from the CMS or the Worker, which is why it matches nothing in either codebase.
+
+Keep one redirect URI. When the real domain arrives, swap it rather than adding.
+
+**Cloudflare separates uploading a version from deploying it.**
+
+The "Deploy to Cloudflare" button uploads a Worker version but can leave it
+undeployed. Every environment-variable edit after that — dashboard or CLI —
+stacks onto that pending version and never reaches the running Worker. The
+symptom is variables that look saved and behave as though they were never set,
+and `wrangler secret put` eventually refuses with:
+
+    Secret edit failed. You attempted to modify a secret, but the latest
+    version of your Worker isn't currently deployed.
+
+Fix, and worth running first if a Worker behaves as if unconfigured:
+
+    npx wrangler versions deploy --name sveltia-cms-auth
+
 ### 3. Nightly rebuilds
 
 The site bakes events in at build time, so **editing the Sheet changes nothing
