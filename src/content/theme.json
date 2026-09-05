@@ -1,0 +1,16 @@
+{
+  "colors": {
+    "accent": "#b10202",
+    "ink": "#16161a",
+    "inkSoft": "#55555f",
+    "rule": "#e2e2e6",
+    "page": "#ffffff",
+    "panel": "#f7f7f8"
+  },
+  "shape": "soft",
+  "motion": true,
+  "background": {
+    "src": "",
+    "overlay": 55
+  }
+}

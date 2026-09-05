@@ -152,6 +152,69 @@ collections:
                 widget: string
                 required: false
 
+      - name: theme
+        label: Theme & Background
+        file: src/content/theme.json
+        description: >-
+          Colors, corner shape, motion, and an optional fixed background photo
+          — decorate the site however you like. Colors are wide open, any
+          value you pick; there's no built-in guardrail against choosing two
+          colors that are hard to read together on purpose, so double-check a
+          new combination actually looks right before you save. (`npm run
+          check` also flags low-contrast pairs for whoever runs it next.)
+        fields:
+          - name: colors
+            label: Colors
+            widget: object
+            fields:
+              - { name: accent, label: Accent (links, dates, highlights), widget: color, allow_input: true, enable_alpha: false }
+              - { name: ink, label: Main text, widget: color, allow_input: true, enable_alpha: false }
+              - { name: inkSoft, label: Secondary text, widget: color, allow_input: true, enable_alpha: false }
+              - { name: rule, label: Lines and borders, widget: color, allow_input: true, enable_alpha: false }
+              - { name: page, label: Page background, widget: color, allow_input: true, enable_alpha: false }
+              - { name: panel, label: Panel background (footer, empty states), widget: color, allow_input: true, enable_alpha: false }
+          - name: shape
+            label: Shape
+            widget: select
+            options:
+              - { label: Sharp corners, value: sharp }
+              - { label: Soft corners (default), value: soft }
+              - { label: Rounded corners, value: round }
+            hint: Applies to event cards, badges, and the empty-state box.
+          - name: motion
+            label: Subtle motion
+            widget: boolean
+            default: true
+            hint: >-
+              A soft fade-in on page load and a gentle hover lift on event
+              rows. Visitors whose devices are set to reduce motion never see
+              it either way, regardless of this setting.
+          - name: background
+            label: Background photo
+            widget: object
+            required: false
+            fields:
+              - name: src
+                label: Photo
+                widget: image
+                required: false
+                hint: >-
+                  Optional. Stays fixed in place while the page scrolls over
+                  it. Leave blank for the plain page background color above. A
+                  wide, uncluttered photo works best — busy photos make text
+                  harder to read even with the overlay below.
+              - name: overlay
+                label: Overlay darkness
+                widget: number
+                value_type: int
+                min: 0
+                max: 90
+                default: 55
+                hint: >-
+                  A dark layer between the photo and the page content, so text
+                  stays readable no matter what the photo looks like. Higher
+                  number = darker. 0 turns it off entirely.
+
       - name: about
         label: About page
         file: src/content/about.json

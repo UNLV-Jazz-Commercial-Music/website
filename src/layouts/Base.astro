@@ -15,6 +15,7 @@
 
 import { SEARCH_ENGINES_ALLOWED } from '../site';
 import { logo } from '../data/settings';
+import { colors, radius, motionEnabled, background } from '../data/theme';
 
 interface Props {
   title?: string;
@@ -25,6 +26,29 @@ const { title, description } = Astro.props;
 
 const SITE_NAME = 'UNLV Jazz & Commercial Music';
 const pageTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
+
+// Theme values are set as inline styles rather than interpolated into the
+// <style> block below, because Astro's <style> tags are parsed and scoped at
+// build time and can't take a runtime variable directly. An inline style
+// attribute is plain HTML, wins over the :root defaults in the stylesheet for
+// the same properties, and needs no special-casing. The :root block keeps the
+// site's original hardcoded values as a fallback, so nothing here can regress
+// the look while the theme is untouched in the CMS.
+const htmlVars =
+  `--accent:${colors.accent};--ink:${colors.ink};--ink-soft:${colors.inkSoft};` +
+  `--rule:${colors.rule};--page:${colors.page};--panel:${colors.panel};` +
+  `--radius:${radius}px;--radius-sm:${Math.round(radius / 2)}px;`;
+
+// A fixed background photo, with a dark overlay under it so page text stays
+// legible regardless of what the photo looks like. Only rendered when Jaxon
+// has actually picked one in the CMS — otherwise body falls back to the
+// plain --page color with no extra styling.
+const bodyStyle = background
+  ? `background-image:linear-gradient(rgba(0,0,0,${(background.overlay / 100).toFixed(2)}),` +
+    `rgba(0,0,0,${(background.overlay / 100).toFixed(2)})),url(${background.src});` +
+    `background-size:cover;background-position:center;background-attachment:fixed;` +
+    `background-repeat:no-repeat;`
+  : undefined;
 
 // Only pages that actually exist. Add to this as pages ship — never link ahead
 // of the build, since a nav pointing at a 404 is worse than a shorter nav.
@@ -43,7 +67,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" style={htmlVars}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -56,7 +80,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     }
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
-  <body>
+  <body class={motionEnabled ? 'motion-on' : undefined} style={bodyStyle}>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -108,6 +132,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     </footer>
 
     <style is:global>
+      /*
+       * Defaults here match the site's original hardcoded look exactly and
+       * exist purely as a fallback (e.g. if a page ever renders without the
+       * inline theme vars from Base.astro's <html style>). The real, editable
+       * values come from src/content/theme.json via that inline style, which
+       * wins over these for the same custom properties on the same element.
+       */
       :root {
         --accent: #b10202;
         --ink: #16161a;
@@ -115,6 +146,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
         --rule: #e2e2e6;
         --page: #ffffff;
         --panel: #f7f7f8;
+        --radius: 6px;
+        --radius-sm: 3px;
         --measure: 68rem;
       }
 
@@ -130,12 +163,49 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
       body {
         margin: 0;
-        background: var(--page);
+        background-color: var(--page);
         color: var(--ink);
         font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
         display: flex;
         min-height: 100vh;
         flex-direction: column;
+      }
+
+      /*
+       * Subtle motion, on by default but switched off entirely from the CMS
+       * (body.motion-on absent) or by a visitor's OS-level reduced-motion
+       * setting — the media query wraps every rule here, so a content editor
+       * turning motion on can never override someone's accessibility setting.
+       */
+      @media (prefers-reduced-motion: no-preference) {
+        body.motion-on main {
+          animation: fade-in 0.4s ease-out;
+        }
+
+        body.motion-on .site-header nav a,
+        body.motion-on a {
+          transition: color 0.15s ease;
+        }
+
+        body.motion-on .event {
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        body.motion-on .event:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(4px);
+          }
+          to {
+            opacity: 1;
+            transform: none;
+          }
+        }
       }
 
       .wrap {
@@ -277,7 +347,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
         gap: 1px;
         background: var(--rule);
         border: 1px solid var(--rule);
-        border-radius: 6px;
+        border-radius: var(--radius);
         overflow: hidden;
       }
 
@@ -329,7 +399,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
         letter-spacing: 0.06em;
         text-transform: uppercase;
         padding: 0.15rem 0.45rem;
-        border-radius: 3px;
+        border-radius: var(--radius-sm);
         vertical-align: 0.1em;
         margin-left: 0.4rem;
       }
@@ -346,7 +416,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
       .empty {
         border: 1px dashed var(--rule);
-        border-radius: 6px;
+        border-radius: var(--radius);
         padding: 2rem 1.25rem;
         text-align: center;
         color: var(--ink-soft);
