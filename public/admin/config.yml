@@ -47,18 +47,20 @@ backend:
   repo: UNLV-Jazz-Commercial-Music/website
   branch: main
   #
-  # base_url must be set to the Sveltia CMS Authenticator Worker's URL once it
-  # is deployed. Uncomment and fill in:
+  # The Sveltia CMS Authenticator Worker that handles GitHub login.
   #
-  #   base_url: https://YOUR-AUTHENTICATOR.workers.dev
+  # NOTE: the bare Worker URL, with NO /callback on the end. The /callback path
+  # goes in the GitHub OAuth App's redirect URI, not here — mixing the two up is
+  # the easiest mistake to make in this setup.
   #
   # While the site was on Netlify this was deliberately ABSENT, because Sveltia
-  # defaults to Netlify as its OAuth client. Off Netlify, it is required.
+  # defaults to Netlify as its OAuth client. Off Netlify it is required.
   #
   # It must NEVER point at api.netlify.com. Unlike Decap/Netlify CMS — where
   # base_url meant the OAuth proxy — in Sveltia it means the OAuth client URL,
   # and pointing it at Netlify's API makes Sveltia treat that as a self-hosted
   # GitHub server. Login then fails confusingly. See HOSTING.md.
+  base_url: https://sveltia-cms-auth.jazz-e41.workers.dev
 
 # Where uploaded images land. media_folder is the path in the repo;
 # public_folder is how the site refers to them in HTML.

@@ -65,7 +65,28 @@ Setup:
 3. Update the **GitHub OAuth App's callback URL** to the Worker's URL. It
    previously pointed at `https://api.netlify.com/auth/done`, which stops
    working once Netlify is gone.
-4. Set `base_url` in `public/admin/config.yml` to the Worker's URL.
+4. Set `base_url` in `public/admin/config.yml` to the Worker's URL — the bare
+   URL, **no `/callback`**. That path belongs in the OAuth App's redirect URI
+   only.
+
+Current authenticator: `https://sveltia-cms-auth.jazz-e41.workers.dev`
+
+Its environment variables (Worker -> Settings -> Variables and Secrets):
+
+| Variable | Value |
+|---|---|
+| `GITHUB_CLIENT_ID` | the OAuth App's Client ID |
+| `GITHUB_CLIENT_SECRET` | the OAuth App's secret, **encrypted** |
+| `ALLOWED_DOMAINS` | every hostname the CMS is served from |
+
+**`ALLOWED_DOMAINS` is what stops any other site on the internet using this
+Worker to mint tokens against your GitHub org.** It is the one setting here that
+is a security control rather than plumbing.
+
+⚠️ **When a real domain is added, add it to `ALLOWED_DOMAINS` too.** Otherwise
+CMS login breaks on the new domain with an unhelpful error, and the cause is
+several steps removed from the symptom. Same for the OAuth App's redirect URIs,
+which accept up to ten.
 
 Note that `base_url` was deliberately absent while on Netlify — Sveltia defaults
 to Netlify's OAuth client. Off Netlify, it becomes required. The comment in
