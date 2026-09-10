@@ -14,39 +14,17 @@
       }
     },
     {
-      "name": "Jazz Ensemble II",
+      "name": "Joe Williams Scholarship Combo",
       "directors": [
-        "Gabriel Carpenter"
+        "Dave Loeb"
       ],
-      "description": "Our second big band, performing a full concert season of its own alongside the vocal ensembles. Many players move up through this group into Jazz Ensemble I.",
-      "aliases": [],
-      "photo": {
-        "src": "/uploads/jazz-ensemble-ii-fall-2025-jazz-fest.webp",
-        "alt": "Jazz Ensemble II on stage at Artemus W. Ham Hall Fall 2025 Jazz Festival"
-      }
-    },
-    {
-      "name": "Contemporary Jazz Ensemble",
-      "directors": [
-        "Julian Tanaka"
+      "description": "A small group of scholarship students performing as a working jazz small group, on campus and throughout Las Vegas.",
+      "aliases": [
+        "Joe Williams Scholarship Quintet"
       ],
-      "description": "Focused on modern and contemporary jazz writing, including music by our own composition students.",
-      "aliases": [],
       "photo": {
-        "src": "/uploads/contemporary-ensemble-ccld-2025.webp",
-        "alt": "Contemporary Jazz Ensemble on stage at the Clark County Library Flamingo location Fall 2025"
-      }
-    },
-    {
-      "name": "Latin Jazz Ensemble",
-      "directors": [
-        "Jose Jimenez-Castro"
-      ],
-      "description": "Afro-Cuban, Brazilian and Latin jazz repertoire. The ensemble has recorded five albums in the Latin Journey series, and recorded along with the Joe Williams Scholarship Quintet in the most recent album Back Home.",
-      "aliases": [],
-      "photo": {
-        "src": "/uploads/latin-jazz-ensemble-ccld-2026.webp",
-        "alt": "Latin Jazz Ensemble on stage at the Clark County Library Flamingo location Spring 2026"
+        "src": "/uploads/joe-williams-quintet-ccld-fall-2025.webp",
+        "alt": "Joe Williams Scholarship Combo on stage at the Clark County Library Flamingo location Fall 2025"
       }
     },
     {
@@ -62,6 +40,30 @@
       }
     },
     {
+      "name": "Latin Jazz Ensemble",
+      "directors": [
+        "Jose Jimenez-Castro"
+      ],
+      "description": "Afro-Cuban, Brazilian and Latin jazz repertoire. The ensemble has recorded five albums in the Latin Journey series, and recorded along with the Joe Williams Scholarship Quintet in the most recent album Back Home.",
+      "aliases": [],
+      "photo": {
+        "src": "/uploads/latin-jazz-ensemble-ccld-2026.webp",
+        "alt": "Latin Jazz Ensemble on stage at the Clark County Library Flamingo location Spring 2026"
+      }
+    },
+    {
+      "name": "Jazz Ensemble II",
+      "directors": [
+        "Gabriel Carpenter"
+      ],
+      "description": "Our second big band, performing a full concert season of its own alongside the vocal ensembles. Many players move up through this group into Jazz Ensemble I.",
+      "aliases": [],
+      "photo": {
+        "src": "/uploads/jazz-ensemble-ii-fall-2025-jazz-fest.webp",
+        "alt": "Jazz Ensemble II on stage at Artemus W. Ham Hall Fall 2025 Jazz Festival"
+      }
+    },
+    {
       "name": "Maryland Parkway Jazz Vocal Ensemble",
       "directors": [
         "Gary Fowler"
@@ -74,17 +76,15 @@
       }
     },
     {
-      "name": "Joe Williams Scholarship Combo",
+      "name": "Contemporary Jazz Ensemble",
       "directors": [
-        "Dave Loeb"
+        "Julian Tanaka"
       ],
-      "description": "A small group of scholarship students performing as a working jazz small group, on campus and throughout Las Vegas.",
-      "aliases": [
-        "Joe Williams Scholarship Quintet"
-      ],
+      "description": "Focused on modern and contemporary jazz writing, including music by our own composition students.",
+      "aliases": [],
       "photo": {
-        "src": "/uploads/joe-williams-quintet-ccld-fall-2025.webp",
-        "alt": "Joe Williams Scholarship Combo on stage at the Clark County Library Flamingo location Fall 2025"
+        "src": "/uploads/contemporary-ensemble-ccld-2025.webp",
+        "alt": "Contemporary Jazz Ensemble on stage at the Clark County Library Flamingo location Fall 2025"
       }
     },
     {
