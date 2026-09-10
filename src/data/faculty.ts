@@ -42,6 +42,8 @@ export interface FacultyMember {
   credentials?: string;
   /** Title, or the instruments and ensembles they teach. */
   role: string;
+  /** Public email address when the faculty member has one. */
+  email?: string;
 }
 
 export const professors: FacultyMember[] = data.professors;

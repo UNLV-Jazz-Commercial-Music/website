@@ -3,17 +3,20 @@
     {
       "name": "David Loeb",
       "credentials": "M.M.",
-      "role": "David Mulkey MD and Laura Taylor Mulkey Endowed Chair of Jazz and Commercial Music"
+      "role": "David Mulkey MD and Laura Taylor Mulkey Endowed Chair of Jazz and Commercial Music",
+      "email": "dave.loeb@unlv.edu"
     },
     {
       "name": "Nathan Tanouye",
       "credentials": "M.M.",
-      "role": "Professor of Jazz and Commercial Music, Studio Trombone · Area Co-coordinator"
+      "role": "Professor of Jazz and Commercial Music, Studio Trombone · Area Co-coordinator",
+      "email": "nathan.tanouye@unlv.edu"
     },
     {
       "name": "Adam Schroeder",
       "credentials": "M.M.",
-      "role": "Associate Professor · Area Co-coordinator · Saxophone, Improvisation, Jazz Combos"
+      "role": "Associate Professor · Area Co-coordinator · Saxophone, Improvisation, Jazz Combos",
+      "email": "adam.schroeder@unlv.edu"
     }
   ],
   "adjunct": [

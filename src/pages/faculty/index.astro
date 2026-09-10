@@ -38,6 +38,11 @@ const groups: { heading: string; people: FacultyMember[] }[] = [
                 )}
               </span>
               <span class="faculty-role">{person.role}</span>
+              {person.email && (
+                <a class="faculty-email" href={`mailto:${person.email}`}>
+                  {person.email}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -85,6 +90,16 @@ const groups: { heading: string; people: FacultyMember[] }[] = [
     .faculty-role {
       color: var(--ink-soft);
       font-size: 0.95rem;
+    }
+
+    .faculty-email {
+      font-size: 0.95rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .faculty-email:hover {
+      text-decoration: underline;
     }
 
     .aside-note {
